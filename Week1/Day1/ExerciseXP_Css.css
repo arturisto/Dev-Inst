@@ -1,0 +1,23 @@
+body{
+  background-color:lightblue;
+  width:1000px;
+  margin: 0px 150px 0px 150px;
+  padding-top:50px;
+
+}
+h1{
+  color:red;
+}
+li:hover{
+  transform:scale(1.01)
+
+}
+img{
+  height:200px;
+  widht:200px;
+  transition: transform 0.5s;
+}
+img:hover{
+  transform:scale(1.1)
+}
+	
