@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Get Geo Location</title>
+    <style>
+        h3{
+          margin-top:30px;
+        }
+      </style>
+      <script>
+        function print(){
+
+        navigator.geolocation.getCurrentPosition(showPosition)
+        }
+
+        function showPosition(position) {
+        document.getElementById("printArea").innerHTML = "Latitude: " + position.coords.latitude +
+        "<br>Longitude: " + position.coords.longitude;;
+        }
+      </script>
+  </head>
+  <body>
+    <h3>Click the below button <span style="color:brown">"get geolocation"</span> to get the exact coordinates :</h3>
+
+    <input type="button" onclick="print()" value="print a div!" />
+    <br />
+    <div id="printArea">
+
+
+      </div>
+  </body>
+</html>
