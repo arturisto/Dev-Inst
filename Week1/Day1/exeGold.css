@@ -1,0 +1,47 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+
+img {
+  width: 100vw;
+  height: auto;
+  max-width: none;
+  max-height: 100vh;
+}
+#box{
+        position:relative;
+        display: inline-block;
+    }
+#box #text{
+  position:absolute;
+  text-align:center;
+  color:yellow;
+  font-size:5em;
+  z-index: 999;
+  top:20%;
+  left: 20%;
+}
+form{
+  top:40%;
+  left: 30%;
+  position:absolute;
+  z-index: 999;
+}
+#name{
+  width:1000px;
+  height:100px;
+  left:30%;
+  font-size:50px;
+  border-radius: 18px;
+  display:inline-block;
+}
+Button{
+  width:200px;
+  height:100px;
+  font-size:30px;
+  border-radius: 18px;
+  display:inline-block;
+}
