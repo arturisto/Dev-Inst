@@ -1,37 +1,40 @@
-html, body {
+body, html {
+
     height: 100%;
-    margin: 0;
-    padding: 0;
+    margin:0;
 
 }
-
-img {
-  width: 100vw;
-  height: auto;
-  max-width: none;
-  max-height: 100vh;
+.bg{
+  background-image: url("https://lovefoodhatewaste.ca/wp-content/uploads/2018/06/FoodBackground.jpg");
+  height: 100%;
+  background-size: cover;
+  background-position:center;
+  background-repeat:no-repeat;
 }
 #box{
-        position:relative;
-        display: inline-block;
-    }
-#box #text{
-  position:absolute;
+    width:100vw;
+    height:30vh;
+    position:absolute;
+    top:30%;
+
+  }
+#text{
+
   text-align:center;
-  color:yellow;
+  color:orange;
   font-size:5em;
-  z-index: 999;
-  top:20%;
-  left: 20%;
+
+  margin-top:3px;
 }
-form{
-  top:40%;
-  left: 30%;
-  position:absolute;
-  z-index: 999;
+
+#input{
+  text-align:center;
+  border-width:5px;
+
+
 }
-#name{
-  width:1000px;
+#textbox{
+  width:40vw;
   height:100px;
   left:30%;
   font-size:50px;
@@ -43,5 +46,5 @@ Button{
   height:100px;
   font-size:30px;
   border-radius: 18px;
-  display:inline-block;
+
 }
