@@ -1,1 +1,1 @@
-earth
+the sun
