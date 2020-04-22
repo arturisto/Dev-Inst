@@ -111,9 +111,11 @@ body{
 }
 .listOfSkillz{
     flex-direction:column;
+
 }
 #skillz li{
   font-size:0.8em;
+
 }
 
 #languages{
@@ -123,12 +125,12 @@ body{
 }
 .language{
 
-  margin:15px 15px 15px 15px;
+  margin:0px 15px 15px 15px;
   border-radius:50%;
   border-color:white;
   border-style: solid;
-  height:80px;
-  width:80px;
+  height:75px;
+  width:75px;
   display: flex;
   justify-content: center;
   align-items: center;
