@@ -1,0 +1,137 @@
+html{
+  height:100%;
+  margin:0;
+}
+body{
+  width:90%;
+  height:100%;
+  margin:0 0 0 10vw;
+  display:flex;
+  background-color:#404040;
+}
+
+.left_out{
+  background-color:#404040;
+  width:20vw;
+  height:100%;
+}
+
+.left_main{
+  background-color:white;
+  width:15vw;
+  height:80%;
+  margin:10vh 0 0 5vw;
+  display:flex;
+  flex-flow:column;
+}
+.left_main #name{
+  font-family:serif;
+  font-size:1.5em;
+  text-align: center;
+}
+.left_main #proff{
+  font-family:serif;
+  text-align: center;
+  font-size:0.8em;
+}
+#profile_pic{
+  width:70%;
+  height:25%;
+  margin:10px 15% 5px 15%;
+
+}
+#profile{
+  width:70%;
+  height:35%;
+  margin:10px 15% 5px 15%;
+  font-size:0.75vw;
+}
+#contactMe{
+  width:70%;
+  height:20%;
+  margin:10px 15% 5px 15%;
+}
+#contactTable{
+  font-size:0.75vw;
+  width:12vw;
+  margin-top:-15px;
+
+}
+.column1{
+    width:5vw;
+    font-style:italic;
+}
+
+.right_out{
+  background-color:white;
+  width:80vw;
+  height:100%;
+}
+.right_main{
+  background-color:	#404040;
+  width:55vw;
+  height:80%;
+  margin-top:10vh;
+  position:relative;
+  overflow: auto;
+}
+.data{
+  position:inherit;
+  color:white;
+  padding: 5px 20px 20px;
+  list-style:none;
+}
+.hovertext{
+    list-style:none;
+    margin-right:30px;
+}
+.hovertext:before {
+    content: "+";
+    margin-right: 4px;
+}
+.exp_text{
+  display:none;
+
+}
+.hovertext:hover >.exp_text{
+  display:block;
+}
+.hovertext:hover {
+  content: "-";
+  margin-right: 4px;
+}
+.exp_text li{
+  font-size:1vw;
+}
+
+#skillz{
+
+    margin:15px 15px 0px 15px;
+    display:flex;
+}
+.listOfSkillz{
+    flex-direction:column;
+
+}
+#skillz li{
+  font-size:0.8em;
+
+}
+
+#languages{
+  display:flex;
+  margin-top:15px;
+  text-align: center;
+}
+.language{
+
+  margin:0px 15px 15px 15px;
+  border-radius:50%;
+  border-color:white;
+  border-style: solid;
+  height:75px;
+  width:75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

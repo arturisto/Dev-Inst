@@ -1,0 +1,279 @@
+html,h1,h2,h3,h4,h5,h6,a{
+    font-family: "Raleway";
+     scroll-behavior: smooth;
+}
+body{
+  display:flex;
+  flex-direction:column;
+}
+header{
+  width:100vw;
+  height:8vh;
+}
+.fixed-top {
+background-color:#fd7e14;
+display:flex;
+flex-direction: row;
+align-items: center;
+overflow: hidden;
+width:100%;
+height:8vh;
+}
+#home{
+font-size:1.5em;
+color:blue;
+text-align:center;
+align-items: center;
+height:80%;
+width:8%;
+display: inline-block;
+float:left;
+}
+#home a{
+  text-decoration: none;
+}
+a:hover{
+  text-decoration:none;
+}
+#rightnavbar{
+  width:92%;
+  height:80%;
+  display: inline-block;
+  padding-right:3%;
+  align-content:stretch;
+  display:flex;
+  flex-direction:row;
+  justify-content: flex-end;
+}
+#rightnavbar .btn{
+  margin-right:10px;
+  color:blue;
+}
+#rightnavbar .btn:hover{
+  background-color:white;
+}
+#body{
+  width:100vw;
+  display:flex;
+  flex-direction:column;
+  align-content: center;
+  justify-content:center;
+}
+#text{
+  width:80%;
+  padding-left:15%;
+  padding-bottom:15%;
+  height:inherit;
+  padding-top:200px;
+  margin-bottom:50px;
+  line-height:2;
+  background-color:transparent;
+  z-index:2;
+}
+#text div{
+  width:80%;
+}
+.overlay{
+  background: url(images/headerback.jpg);
+  background-size: cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-attachment: fixed;
+  opacity: 0.2;
+  top: 8vh;
+  height:92vh;
+  width:100vw;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -2;
+  position:absolute;
+}
+
+.btn.btn-default.btn-lg{
+  background-color:#fd7e14;
+  margin-top:25px;
+}
+.btn.btn-default.btn-lg:hover{
+  background-color:grey;
+  color:white;
+}
+.article-header{
+  margin-top:50px;
+  text-align:center;
+  color:#fd7e14;s
+}
+.anchor{
+}
+article{
+  width:75vw;
+  margin-left:15%;
+  margin-right:15%;
+  padding-top:50px;
+  display:flex;
+  flex-direction: row;
+}
+#about-me{
+  height:60vh;
+}
+#about-picture{
+  border-right-color: darkgreen;
+  border-width:0 5px 0 0;
+  border-style:solid;
+  height:300px;
+  padding-right:10px;
+  margin-right:10px;
+}
+#about-picture img{
+  border-radius: 50%;
+
+}
+#about-picture figcaption{
+  padding-top:5px;
+  text-align:center;
+}
+#about-me-text{
+  vertical-align: middle;
+  padding-right:15%;
+  height:300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height:2;
+}
+.gallery{
+  display:flex;
+  flex-wrap: wrap;
+  width: 80vw;
+}
+.gallery img{
+  width:30%;
+  height:30vh;
+  margin: 15px 15px 15px 15px;
+  object-fit:contain;
+}
+.container.blog{
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+}
+.btn.btn-primary{
+  color:black;
+}
+.btn.btn-primary:hover{
+  color:white;
+}
+.card-deck{
+  display:flex;
+  justify-content:space-between;
+}
+.container-card{
+  position:relative;
+  width:20%;
+}
+.container-card .card{
+text-align: center;
+display:flex;
+flex-direction:column;
+color:white;
+width:100%;
+border:none;
+margin-right:15px;
+}
+.card-img-top{
+  object-fit:cover;
+}
+.card .team-name{
+  background-color:#fd7e14;
+  border-bottom-left-radius: 100%;
+}
+.card .team-position{
+  text-align:left;
+  color:grey;
+}
+.card-img-overlay {
+  bottom: 100%;
+  background-color:rgb(253,126,20,0.6);
+  overflow: hidden;
+  width: 0%;
+  height:0%;
+  transition: 0.5s ease-in-out 0s;
+  left:6.5%;
+}
+.container-card:hover .card-img-overlay{
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+.container-card:hover .team-name{
+  display:none;
+}
+.overlay-text{
+  color:black;
+  padding-top:40%;
+}
+#contact-me{
+  margin-top:50px;
+  border-top-width:1px;
+  border-top-style:solid;
+  border-top-color:lightgrey;
+  margin-bottom:50px;
+}
+.icons-text{
+  display:flex;
+  flex-direction: column;
+  width:50%;
+  align-items: center;
+  justify-content: center;
+
+}
+.touch-text{
+  white-space: nowrap;
+  color:#fd7e14;
+  margin-bottom:10px;
+}
+.fa{
+  font-size:28px;
+  background-color:#fd7e14;
+  color:white;
+  width:30px;
+  height:30px;
+  padding:2px;
+  margin-right:5px;
+}
+.fa:hover{
+  text-decoration: none;
+}
+.container.contact{
+  display:flex;
+  flex-direction: column;
+  width:100%;
+  height:100%;
+}
+.contact-form{
+  width:100%;
+}
+.contact-form .text-area{
+  margin-bottom:15px;
+  width:100%;
+  height:40px;
+  line-height: 30px;
+  border-radius:3px;
+  resize: none
+}
+.contact-form .text-area-2{
+  margin-bottom:15px;
+  width:100%;
+  height:120px;
+  line-height: 30px;
+  border-radius:3px;
+  vertical-align:baseline;
+}
+.btn.contact{
+  width:100%;
+  height:40px;
+  background-color: #fd7e14;
+  border-radius:3px;
+  color:white;
+
+}
