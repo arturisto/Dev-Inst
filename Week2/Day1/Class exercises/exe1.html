@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Exe1</title>
+    <style rel="stylesheet" type="text/css">
+        .grid
+          {
+          display:grid;
+          grid-template-rows: repeat(4, 100px);
+          grid-template-columns: repeat(3, 100px);
+          grid-gap:10px 10px;
+          }
+        .red
+          {
+          grid-column: 1;
+          background-color:red;
+          border-color:black;
+          border-width:1px;
+          }
+        .blue{
+          grid-column:2/span 2;
+          background-color:blue;
+          border-color:black;
+          border-width:1px;
+        }
+        .blue.one{
+          grid-row:1;
+        }
+        .blue.two{
+          grid-row:2;
+        }
+        .blue.three{
+          grid-row:3;
+        }
+        .yellow{
+          grid-column:1/span 3;
+          grid-row:4;
+          background-color:yellow;
+          border-color:black;
+          border-width:1px;
+        }
+
+    </style>
+  </head>
+  <body>
+    <div class="grid">
+      <div class= "red">
+      </div>
+      <div class= "red">
+      </div>
+      <div class= "red">
+      </div>
+      <div class= "blue one">
+      </div>
+      <div class= "blue two">
+      </div>
+      <div class= "blue three">
+      </div>
+        <div class = "yellow">
+          </div>
+      </div>
+  </body>
+</html>

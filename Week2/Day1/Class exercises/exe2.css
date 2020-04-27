@@ -1,0 +1,69 @@
+html,body{
+  height:100%;
+}
+.grid{
+  display:grid;
+  grid-template-columns: repeat(80px,5);
+  grid-template-columns:minmax(80px 81px);
+  grid-template-rows:repeat(200px,11);
+  grid-template-rows:minmax(200px 201px);
+  grid-template-areas:
+    "header header header header header"
+    "hero hero main main main"
+    "hero hero main main main"
+    "hero hero main main main"
+    "side side main main main"
+    "side side extra extra extra"
+    "side side extra extra extra"
+    "side side extra extra extra"
+    "img img img img posts"
+    "img img img img posts"
+    "footer footer footer footer footer";
+  grid-gap:10px 20px;
+}
+.box{
+  color:ghostwhite;
+  font-size: 1.5em;
+  text-align: center;
+}
+.header{
+  grid-area:header;
+  background-color:aqua;
+}
+.hero{
+  grid-area:hero;
+  background-color:Blueviolet;
+  display:flex;
+  justify-content:center;
+  align-items: center;
+}
+.main-content{
+  grid-area:main;
+  background-color:DarkGoldenRod;
+  display:flex;
+  flex-direction:column;
+}
+.text{
+  font-size:0.5em;
+  width:auto;
+}
+.sidebar{
+  grid-area:side;
+  background-color:darkolivegreen;
+}
+.extraContent{
+  grid-area:extra;
+  background-color:grey;
+}
+.related-img{
+  grid-area:img;
+  background-color:ForestGreen;
+}
+.related-post{
+  grid-area:posts;
+  background-color:pink;
+}
+.footer{
+  grid-area:footer;
+  background-color:orange;
+}

@@ -1,0 +1,43 @@
+.container{
+  display:grid;
+  grid-gap:10px;
+  grid-template-rows: repeat(5, 50px);
+  grid-template-columns: repeat(9, 80px);
+}
+.box{
+  text-align: center;
+  color:white;
+  font-size: 3em;
+}
+.one{
+  grid-column:1/span 9;
+  background-color: crimson;
+}
+.two{
+  grid-column:1/span 3;
+  grid-row:2/span 2;
+  background-color:gold;
+}
+.three{
+  grid-column:4/span 3;
+  grid-row:2;
+  background-color:aqua;
+}
+.four{
+  grid-column:7/span 3;
+  grid-row:2;
+  background-color:maroon;
+}
+.five{
+  grid-column:4/span 6;
+  grid-row:3;
+  background-color:crimson;
+}
+.six{
+  grid-column:span 6;
+  background-color:aqua;
+}
+.seven{
+  grid-column:span 3;
+  background-color:gold;
+}

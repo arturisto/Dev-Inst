@@ -1,0 +1,136 @@
+html, body{
+  width:100%;
+  height:100%;
+}
+body::after{
+  content:'';
+  background-image: url(https://ae01.alicdn.com/kf/HTB1DOXXJFXXXXXeXFXXq6xXFXXXc/Vinyl-3x5ft-Shop-Cloth-Photography-Background-Cool-Wood-Floor-Korean-Portrait-Theme-Living-Room-Free-Shipping.jpg);
+  background-size:cover;
+  background-repeat: no-repeat;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  opacity:0.2;
+  position:absolute;
+  }
+
+@media (max-width: 800px) {
+    body::after{
+      background-repeat:repeat-y ;
+      background-size:auto;
+    }
+  }
+.container{
+    display:flex;
+    flex-direction:column;
+    text-align: center;
+    width:100%;
+    margin:auto;
+}
+.header{
+  color:black;
+  font-size:40px;
+  font-style:bold;
+  margin:auto;
+  margin-bottom:50px;
+  width:80%;
+}
+@media (max-width: 767px) {
+  .header{
+    font-size:20px;
+  }
+}
+@media (min-width: 768px) {
+  .header{
+    font-size:30px;
+  }
+}
+@media (min-width: 1000px) {
+  .header{
+    font-size:40px;
+  }
+
+}
+.promo{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  margin:auto;
+  margin-bottom:50px;
+  font-size:0.8em;
+  width:80%;
+}
+.number{
+  color:purple;
+  font-size: 30px;
+  font-weight:bold;
+
+}
+
+.deck{
+  display:flex;
+  flex-direction: row;
+  width:100%;
+  margin:auto;
+  justify-content: space-around;
+  margin-top:40px;
+}
+@media (max-width: 800px) {
+  .deck{
+    flex-direction:column;
+    width:auto;
+    justify-content: space-around;
+    margin-top:20px;
+  }
+}
+
+.card{
+  display:relative;
+  width:300px;
+  height:200px;
+  background-color:white;
+  opacity:1;
+  z-index: 1;
+  font-family: 'Nunito Sans', sans-serif;
+}
+.card-2{
+  margin-top:5%;
+}
+@media (max-width: 800px) {
+    .card{
+    }
+    .card-2, .card-3{
+      margin-top:200px;
+    }
+}
+
+.card-above{
+  height:170px;
+  color:grey;
+
+  padding:15px 25px 15px 25px;
+  text-align: left;
+}
+.card-bottom{
+  height:130px;
+
+}
+.badge{
+  height:100px;
+  width:100px;
+  border-radius: 50%;
+  position:absolute;
+  display:block;
+  vertical-align: middle;
+  transform: translate(100%,-175%);
+}
+.name{
+  color:white;
+  font-weight: bold;
+
+}
+.title{
+  line-height: 3;
+  color:ghostwhite;
+  font-size:0.8em;
+}
