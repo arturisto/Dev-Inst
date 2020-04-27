@@ -3,10 +3,8 @@ html,body{
 }
 .grid{
   display:grid;
-  grid-template-columns: repeat(80px,5);
-  grid-template-columns:minmax(80px 81px);
-  grid-template-rows:repeat(200px,11);
-  grid-template-rows:minmax(200px 201px);
+  grid-template-columns: repeat(5,80px);
+  grid-template-rows:repeat(11,200px);
   grid-template-areas:
     "header header header header header"
     "hero hero main main main"
