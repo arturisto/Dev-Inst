@@ -1,0 +1,203 @@
+.container{
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+}
+.outer{
+  display:grid;
+  grid-auto-rows:auto;
+  grid-gap:10px;
+}
+.navbar{
+  grid-row:1;
+  background-color: midnightblue;
+  color:white;
+  font-size:1em;
+  text-align: center;
+  height:3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn{
+    text-decoration:none;
+    background-color:mintcream;
+    font-size:0.7em;
+    height:90%;
+    padding:0.5rem;
+    border-radius:0.2rem;
+    vertical-align:middle;
+    margin-left:15px;
+}
+@media (max-width:800px) {
+  .navbar{
+  font-size:0.8em;
+  }
+  .navbar span{
+
+
+  }
+  .btn{
+    font-size:0.6em;
+    white-space: nowrap;
+    margin-right:15px;
+  }
+}
+
+.inner{
+  grid-row:2;
+  background-image: url(https://nyxmoros.files.wordpress.com/2015/03/beautiful-sphere-website-backgrounds-different-113494.jpg);
+  background-repeat: no-repeat;
+  background-size:cover;
+  height:90vh;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+.upper-text{
+  font-size:2em;
+  color:white;
+  letter-spacing: 3px;
+  margin:auto;
+}
+.form{
+  width:35%;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  grid-template-rows:repeat(3, 1fr) 3fr 1fr ;
+  grid-gap:10px;
+  margin:auto;
+  margin-top:0;
+}
+.fname{
+  grid-column:1;
+}
+.lname{
+  grid-column:2;
+}
+.email{
+  grid-column:3;
+}
+ label{
+  display:inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.phone{
+  grid-column:1;
+}
+.url{
+  grid-column:2;
+}
+.company{
+  grid-column:3;
+}
+.employe{
+  grid-column:1/span 3;
+
+}
+.service{
+  grid-column:1/span 3;
+}
+.checkbox{
+  grid-column:1/span 3;
+}
+select{
+  width:100%;
+  height:30px;
+}
+input:not(.check){
+  height:2em;
+    width:98%;
+}
+label{
+  font-size: 0.8rem;
+}
+.services{
+  list-style:none;
+  padding-left: 0;
+}
+@media (max-width:1000px){
+  .form{
+    width:35%;
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    grid-template-rows:repeat(3, 1fr) 1fr 3fr 1fr ;
+    grid-gap:10px;
+    margin:auto;
+
+  }
+  .box{
+    height:50px;
+  }
+  .fname{
+    grid-column:1;
+  }
+  .lname{
+    grid-column:2;
+  }
+  .email{
+    grid-column:1;
+    white-space: nowrap;
+  }
+  .phone{
+    grid-column:2;
+  }
+  .url{
+    grid-column:1;
+  }
+  .company{
+    grid-column:2;
+  }
+  .employe{
+    grid-column:1/span 2;
+
+  }
+  .service{
+    grid-column:1/span 2;
+  }
+  .service span{
+    display:inline-block;
+    white-space:normal;
+  }
+  .checkbox{
+    grid-column:1/span 2;
+  }
+  .check-label{
+    font-size: 0.6rem;
+  }
+  select{
+    width:100%;
+
+  }
+  input:not(.check){
+    height:2em;
+      width:98%;
+  }
+  label{
+    font-size: 0.8rem;
+  }
+  .services{
+    list-style:none;
+    padding-left: 0;
+  }
+
+}
+.bellow-btn{
+  margin:auto;
+  margin-top:-50px;
+  text-decoration:none;
+  background-color:midnightblue;
+  font-size:0.85em;
+  padding:0.5rem;
+  border-radius:0.2rem;
+  vertical-align:middle;
+  color:white;
+
+}
+.bellow-btn a{
+  text-decoration: none;
+  color:white;
+}
