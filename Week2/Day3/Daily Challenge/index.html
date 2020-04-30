@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Challenge</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        .main{
+          margin-top:15px;
+        }
+        @media (max-width: 767px) {
+          li{ font-size:0.7em}
+          .btn{font-size:0.7em}
+        }
+        @media (min-width: 768px) {
+          li{ font-size:0.8em}
+          .btn{font-size:0.8em}
+        }
+        @media (min-width: 992px) {
+          li{ font-size:0.9em}
+          .btn{font-size:0.9em}
+        }
+        @media (min-width: 1200px) {
+          li{ font-size:1em}
+          .btn{font-size:1em}
+        }
+        .sidebar{
+          margin-bottom:auto;
+        }
+
+        .blockquote{
+          border-left:5px solid lightgrey;
+          padding-left:15px;
+          font-size:0.95em;
+         }
+         .form-control.search{
+           width:90%;
+
+         }
+         .btn{
+           margin:auto;
+         }
+         img{
+           margin-right:15px;
+         }
+    </style>
+  </head>
+  <body>
+      <div class="container main">
+        <div class="row">
+          <nav class="col-3 sidebar border rounded bg-light">
+            <h4>Some Favourites</h4>
+              <ul>
+                <li> Celery Root</li>
+                  <li> Spaghetti Squash</li>
+                  <li> Killer Mushrooms</li>
+                </ul>
+              <input type="textarea" class="form-control search" />
+              <button type="button" class="btn btn-primary">Search Recipes</button>
+
+            </nav>
+
+          <div class="col-8">
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+              Have you had your veggies yet?
+              </div>
+              <div class="main-text">
+                <h2>Wild & Wacky Veggtables</h2>
+                <blockquote class="blockquote" cite="http://">
+                  The Beet is the most intense of vegetables.The radish,admittedly,is more feverish,but the fire of the radish is cold fire thefire of discontent not passion.Tomatoes are lusty enough,yet there runs through tomatoes are undercurrent of frivolity.Beets are deady serious.
+                   <footer class="blockquote-footer">Tom Robbins </footer>
+                </blockquote>
+
+                <h3>Some Diseases</h3>
+                <table class="table">
+                  <thead>
+                      <th>Veggie</th>
+                      <th>Disease</th>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td>beets</td>
+                            <td>Beeturia</td>
+                      </tr>
+                      <tr>
+                        <td>Carrot</td>
+                        <td>Carotenosis</td>
+                      </tr>
+                  </tbody>
+                </table>
+                <div class="row">
+                  <img class="img-thumbnail" src="carrot.jpg" />
+                  <img class="img-thumbnail border border-info" src="beet.jpg" />
+                  </div>
+                <h2>Really informative info</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+          </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  </body>
+</html>
