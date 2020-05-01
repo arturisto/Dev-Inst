@@ -1,0 +1,10 @@
+.navbar-brand{
+  color:blue;
+}
+.navbar-custom{
+  flex-direction: row;
+  background:black;
+}
+.nav-link{
+  color:grey;
+}
