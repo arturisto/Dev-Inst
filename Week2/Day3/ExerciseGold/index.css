@@ -1,0 +1,88 @@
+html, body{
+  width:100%;
+  min-height: 100%;
+  height:100%;
+}
+.body{
+  background-image: url(https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/392-ted8565-ae.jpg?auto=format&bg=transparent&con=3&cs=srgb&dpr=1&fm=jpg&ixlib=php-3.1.0&mark=rawpixel-watermark.png&markalpha=90&markpad=13&markscale=10&markx=25&q=75&usm=15&vib=3&w=1400&s=26252549506e3b0811e1b9337ffd1248);
+  background-size:cover;
+  height:100%;
+  width:100%;
+  margin:0;
+  padding:0;
+  max-width:none;
+}
+.nav-item-custom{
+  display:flex;
+  font-weight: bold;
+  margin-left:15px;
+  margin-right:15px;
+}
+.nav-item-custom a{
+  color: chartreuse;
+}
+.jumbotron{
+}
+.headline h1{
+  font-size: 5em;
+  color:chartreuse;
+}
+.textarea{
+  color:cadetblue;
+}
+.textarea span{
+  color:red;
+}
+.form-custom{
+  height:4.5em;
+  margin:auto;
+  text-align: center;
+  justify-content: center;
+}
+.input-div{
+  width:30%;
+  height:100%;
+}
+.input-area{
+  position:relative;
+  height: 50px;;
+}
+.label{
+  position:absolute;
+  margin:auto;
+  left:24vw;
+  top:0;
+  padding-left:5px;
+}
+.input-area:focus + .label{
+  font-size:0.7em;
+  color:darkgreen;
+  transition:all 0.5s ease;
+}
+.btn-dropdwon{
+  background-color:white;
+
+}
+.btn-job{
+  display: inline-block;
+  height: 65%;
+  margin-left:15px;
+  font-weight: 400;
+  color: #212529;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  background-color:chartreuse;
+}
+.list-group-item{
+  color:white;
+  background-color:chartreuse;
+}
+.list-group-item:hover
+{background-color: #28a745;}
