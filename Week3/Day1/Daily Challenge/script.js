@@ -5,7 +5,7 @@ array.splice(index,1);
 array.sort();
 console.log(array.toString());
 array.push('kiwi');
-lindex =array.indexOf('Apples');
+index =array.indexOf('Apples');
 array.splice(index,1);
 array.reverse();
 console.log(array.toString());
