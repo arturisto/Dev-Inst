@@ -17,20 +17,21 @@ function createCalendar(elem, year, month){
   let firstDay = new Date(year,month-1);
   console.log(firstDay);
   var firstDayOfWeek = firstDay.getDay()
-  var daysInMonth = new Date(year, month+1,0).getDate();
+  console.log(firstDayOfWeek);
+  var daysInMonth = new Date(year, month,0).getDate();
   console.log(daysInMonth+firstDayOfWeek);
   let flag = false;
-  for (let i=0; i <daysInMonth+firstDayOfWeek;i++){
+  for (let i=0; i <daysInMonth+firstDayOfWeek-1;i++){
       if (i%7 == 0){
         th = document.createElement("tr");
         flag = true;
       }
       tr = document.createElement("td");
-      if (i <=6 && i<firstDayOfWeek){
+      if (i <=6 && i<firstDayOfWeek-1){
         tr.innerHTML='.';
       }
       else{
-        tr.innerHTML=i-firstDayOfWeek+1;
+        tr.innerHTML=i-firstDayOfWeek+2;
       }
       th.appendChild(tr);
       if (i%6 == 0){
