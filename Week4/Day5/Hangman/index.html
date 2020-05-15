@@ -2,9 +2,58 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Hang Man</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link href="style.css" rel="stylesheet">
   </head>
   <body>
+
+    <div class="container">
+        <div class="lives">
+          <span class=""><i class="fas fa-heart fa-2x" id="l-1"></i></span>
+          <span class=""><i class="fas fa-heart fa-2x" id="l-2"></i></span>
+          <span class=""><i class="fas fa-heart fa-2x" id="l-3"></i></span>
+          <span class=""><i class="fas fa-heart fa-2x" id="l-4"></i></span>
+          <span class=""><i class="fas fa-heart fa-2x" id="l-5"></i></span>
+          <span class=""><i class="fas fa-heart fa-2x" id="l-6"></i></span>
+          <span class=""><i class="fas fa-heart fa-2x" id="l-7"></i></span>
+          <span class=""><i class="fas fa-heart fa-2x" id="l-8"></i></span>
+          <span class=""><i class="fas fa-heart fa-2x" id="l-9"></i></span>
+          <span class=""><i class="fas fa-heart fa-2x" id="l-10"></i></span>
+        </div>
+        <div class = "gamepane">
+              <div class="guess">
+              </div>
+              <div class="letters">
+                <button type="button" class="letter a" name="button" onclick="javascript:my_f('a');">a</button>
+                <button type="button" class="letter b" name="button" onclick="javascript:my_f('b');">b</button>
+                <button type="button" class="letter c" name="button" onclick="javascript:my_f('c');">c</button>
+                <button type="button" class="letter d" name="button" onclick="javascript:my_f('d');">d</button>
+                <button type="button" class="letter e" name="button" onclick="javascript:my_f('e');">e</button>
+                <button type="button" class="letter f" name="button" onclick="javascript:my_f('f');">f</button>
+                <button type="button" class="letter g" name="button" onclick="javascript:my_f('g');">g</button>
+                <button type="button" class="letter h" name="button" onclick="javascript:my_f('h');">h</button>
+                <button type="button" class="letter i" name="button" onclick="javascript:my_f('i');">i</button>
+                <button type="button" class="letter j" name="button" onclick="javascript:my_f('j');">j</button>
+                <button type="button" class="letter k" name="button" onclick="javascript:my_f('k');">k</button>
+                <button type="button" class="letter l" name="button" onclick="javascript:my_f('l');">l</button>
+                <button type="button" class="letter m" name="button" onclick="javascript:my_f('m');">m</button>
+                <button type="button" class="letter n" name="button" onclick="javascript:my_f('n');">n</button>
+                <button type="button" class="letter o" name="button" onclick="javascript:my_f('o');">o</button>
+                <button type="button" class="letter p" name="button" onclick="javascript:my_f('p');">p</button>
+                <button type="button" class="letter q" name="button" onclick="javascript:my_f('q');">q</button>
+                <button type="button" class="letter r" name="button" onclick="javascript:my_f('r');">r</button>
+                <button type="button" class="letter s" name="button" onclick="javascript:my_f('s');">s</button>
+                <button type="button" class="letter t" name="button" onclick="javascript:my_f('t');">t</button>
+                <button type="button" class="letter u" name="button" onclick="javascript:my_f('u');">u</button>
+                <button type="button" class="letter v" name="button" onclick="javascript:my_f('v');">v</button>
+                <button type="button" class="letter w" name="button" onclick="javascript:my_f('w');">w</button>
+                <button type="button" class="letter x" name="button" onclick="javascript:my_f('x');">x</button>
+                <button type="button" class="letter y" name="button" onclick="javascript:my_f('y');">y</button>
+                <button type="button" class="letter z" name="button" onclick="javascript:my_f('z');">z</button>
+              </div>
+        </div>
+      </div>
     <script src="script.js" charset="utf-8"></script>
   </body>
 </html>
