@@ -1,12 +1,11 @@
 let word = [];
-let guessed_letters=0;
 let lives = 10;
 word = prompt(" please choose sentance(up to 20 charecters)").split("");
 while(word.length>20 ){
   word = prompt(" please choose sentance(up to 20 charecters)").split("");
 }
-guessed_letters = (word.join("")).split(" ").join("").length;
-console.log(guessed_letters);
+let guessed_letters = (word.join("")).split(" ").join("").length;
+
 
 createWord(word);
 
