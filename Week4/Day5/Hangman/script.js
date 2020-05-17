@@ -1,6 +1,6 @@
 let word = [];
 let lives = 10;
-word = prompt(" please choose sentance(up to 20 charecters)").split("");
+word = prompt(" please choose sentance(up to 20 charecters)").toLowerCase().split("");
 while(word.length>20 ){
   word = prompt(" please choose sentance(up to 20 charecters)").split("");
 }
@@ -36,12 +36,10 @@ function alertFunc(msg){
 }
 
 function loselife(elem){
-
   for (let i = 4;i>=0;i--)
   {
     elem.setAttribute("style","transform:translateY(100px);transition: all 1s ease-in-out;");
     elem.style.opacity=i/4
-
   }
 }
 
