@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title>ExeXP</title>
+ </head>
+ <style>
+     #container {
+       width: 400px;
+       height: 400px;
+       position: relative;
+       background: yellow;
+     }
+     #animate {
+       width: 50px;
+       height: 50px;
+       position: absolute;
+       background-color: red;
+     }
+     .container{
+       width: 400px;
+       height: 400px;
+       position: relative;
+       background: black;
+     }
+     #dragable{
+       width: 50px;
+       height: 50px;
+       position: absolute;
+       background-color: red;
+     }
+      </style>
+ <body>
+     <p><button onclick="myMove()">Click Me</button></p>
+     <div id ="container">
+       <div id ="animate"></div>
+     </div>
+
+     <div class="container" id = "draggedon" ondragover="over(event);" ondrop="drop(event);" >
+
+     </div>
+     <div id = "dragable" draggable ="true" ondragstart="start(event);">
+
+     </div>
+  <script src="script.js"></script>
+ </body>
+</html>
