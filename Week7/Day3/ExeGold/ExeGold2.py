@@ -23,7 +23,7 @@ def main():
     for i in l:
         total =total + i
     print("total throws: {}".format(total))
-    print("avg throws: {}".format(round(total/100,2)))
+    print("avg throws: ".format(round(total/100,2)))
 
 if __name__ == "__main__":
     main()
