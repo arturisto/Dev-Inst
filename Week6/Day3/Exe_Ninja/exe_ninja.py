@@ -11,7 +11,8 @@ def main():
     new_list = []
     new_list.append(l[0])
     new_list.append(l[-1])
-    print("The first and the last items of list are: {}".format(new_list))
+    print("The first and the la"
+          "st items of list are: {}".format(new_list))
     new_list.clear()
     for i in l:
         if i >50:
