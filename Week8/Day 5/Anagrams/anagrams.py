@@ -26,7 +26,7 @@ def main():
             continue
         else:
             if user_input == 1:
-                word_input = input("enter a single english word: ")
+                word_input = input("enter a single english word with at least two letters: ")
 
                 if check_input(word_input):
                     if anagram.is_valid_word(word_input.upper()):

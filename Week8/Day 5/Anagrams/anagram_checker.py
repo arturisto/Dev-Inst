@@ -17,6 +17,8 @@ class AnagramChecker:
                     self.words[line[:2]] = line
 
     def is_valid_word(self, word):
+        if len(word) <2:
+            return False
         if word in self.words[word[:2]]:
             return True
         else:
