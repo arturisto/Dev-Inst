@@ -4,21 +4,8 @@ import copy
 
 class Cell:
 
-    def __init__(self, position=None):
-        if position is None:
-            if random.random() >= 0.5:
-                self.is_alive = 1  # alive
-            else:
-                self.is_alive = 0  # dead
-
-        else:
-            self.is_alive = position
-
-    def die(self):
-        self.is_alive = 0
-
-    def alive(self):
-        self.is_alive = 1
+    def __init__(self, position):
+        self.is_alive = position
 
 
 class Grid:
@@ -80,7 +67,6 @@ class Grid:
 
 
 def main():
-    # grid = Grid(4)
 
     grid = Grid(6, [[0, 0, 0, 0, 0, 0],
                     [0, 0, 0, 0, 0, 0],
