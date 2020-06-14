@@ -15,8 +15,6 @@ class Gene:
         else:
             self.param = 0
 
-
-
 class Chromosome:
 
     def __init__(self):

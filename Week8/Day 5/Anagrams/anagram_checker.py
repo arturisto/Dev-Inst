@@ -4,10 +4,8 @@ class AnagramChecker:
 
         self.file = open("words.txt", "r")
         self.words = {}
-
         for line in self.file:
             line = line.rstrip("\n")
-
             if len(line) == 2:
                 self.words[line] = []
             else:
