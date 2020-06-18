@@ -19,24 +19,14 @@ def game():
     """)
     user_input = input(">>")
 
-    if user_input != "p" and user_input != "r" and user_input != "s":
+    if user_input not in ["r","p","s"]:
         print("wrong input, try again")
     else:
 
-        computer_choice = random.randint(1, 3)
-        # 1 - rock
-        # 2 - paper
-        # 3 - scissors
-        if computer_choice == 1:
-            computer_choice = "rock"
-        elif computer_choice == 2:
-            computer_choice = "paper"
-        else:
-            computer_choice= "scissors"
+        computer_choice = random.choice(["rock","paper","scissors"])
 
         # draw cases
-        if (computer_choice == "rock" and user_input == "r") or (computer_choice == "paper" and user_input == "p") or (
-                computer_choice == "scissors" and user_input == "s"):
+        if computer_choice == user_input:
             print(f"computer also chose {computer_choice} , it's a draw")
             return "draw"
         # computer wins cases
@@ -62,7 +52,7 @@ def main():
         """)
         user_input = input(">>")
 
-        if user_input != 'g' and user_input != 'x' and user_input != 's':
+        if user_input not in ['g','s','x']:
             print("wrong input, try again")
         elif user_input == "x":
             print_output(score_computer, score_user, draw)
