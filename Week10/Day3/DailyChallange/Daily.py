@@ -10,14 +10,15 @@ with open(path, "r") as file:
     u = g.get_user()
     repo = u.create_repo("HW repo")
     path = "D:\Developers Institute\git\Week10\Day3\DailyChallange\daily.py"
-    repo.create_file(path,"commit test",token)
+    with open (path, "r") as content:
+        repo.create_file(path,"commit test",content.read())
 path = "C:/Users/USER/Desktop/emailpassword.txt"
 
 with open(path,"r") as file:
     email_password = file.read()
 
     mail_content = """Hi Eyal,
-    THe HW is updated in the the repo - https://github.com/arturisto/test1
+    THe HW is updated in the the repo - https://github.com/arturisto/HW-repo
     and also in my main github folder: https://github.com/arturisto/Dev-Inst/tree/master/Week10/Day3/DailyChallange
     Thanks,
     Arthur
