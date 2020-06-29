@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask Website</title>
+    <style>
+        html,body{
+            height:100%
+            width:100%
+        }
+        .container{
+            width:60%;
+            margin:0 auto 0 auto;
+            background-color:ghostwhite;
+            border:1px solid white;
+            height:100vh;
+
+        }
+        .navbar{
+            overflow:hidden;
+            background-color:azure;
+        }
+        .tab{
+            float:left;
+            font-size:1.5em;
+            background-color:inherit;
+            border:none;
+            outline:none;
+        }
+        .active{
+            background-color:lightgray;
+
+        }
+        .tab:hover{
+            background-color:cyan;
+        }
+
+        .data{
+            padding-left:15px;
+        }
+        #value{
+            display:none;
+        }
+        </style>
+</head>
+<body>
+    <div class = "container">
+          <div class = "navbar">
+              <button class = "tab active" id = "home" ><a href = "http://127.0.0.1:5000/Home">Home</a></button>
+              <button class = "tab" id = "lesson" ><a href = "http://127.0.0.1:5000/Lesson">Lesson</a></button>
+              <button class = "tab" id = "exe" ><a href = "http://127.0.0.1:5000/Exercise">Exercise</a></button>
+          </div>
+          <div class = "data " id = "div_home">
+                <h3>Hello to my daily challange</h3>
+              <p> It is 01.17pm, it is very late.<br>
+                  It took me very long to do this homework!</p>
+          </div>
+          <div class = "data " id = "value">
+                {{value}}
+          </div>
+    </div>
+    <script>
+        function makeActive(){
+                let tab = '{{tab}}'
+                if (tab == "home")
+                {
+                    document.getElementById("div_home").style.display = "initial";
+
+                }
+                else
+                {
+                    document.getElementById("div_home").style.display = "none";
+                    document.getElementById("value").style.display = "initial";
+
+                }
+
+                let x = document.getElementsByClassName("active");
+                x[0].classList.remove("active");
+                document.getElementById(tab).classList.add("active");
+
+        }
+        window.onload =  makeActive
+    </script>
+</body>
+</html>
