@@ -1,0 +1,24 @@
+<!-- news.html -->
+
+            <!DOCTYPE html>
+            <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <title></title>
+
+                    <link rel="stylesheet" href="news.css">
+                </head>
+                <body>
+                    <div class="container">
+                        <h1>Today news</h1>
+
+
+
+                    </div>
+
+                </body>
+
+                <script>
+                    var news = {{ news_dict }};
+                </script>
+            </html>
