@@ -1,0 +1,21 @@
+html,body{
+    height:100%;
+    width:100%;
+}
+.container{
+    width:50%;
+    margin: 0 auto 0 auto;
+
+}
+.profile_picture{
+    width:100px;
+    height:100px;
+}
+.main_head{
+    font-size:1.5em;
+}
+.main_head span{
+
+    font-size:0.8em;
+
+}
