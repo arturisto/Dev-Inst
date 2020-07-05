@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+{% block body %}
+<h1>{{cv.fname}} {{cv.lname}}</h1>
+<h4>{{cv.proffession}}</h4>
+  <br>
+  <ul>
+    <li> {{cv.email}}  </li>
+    <li> {{cv.career}}  </li>
+    <li> {{cv.Education}}  </li>
+  </ul>
+
+{% endblock %}

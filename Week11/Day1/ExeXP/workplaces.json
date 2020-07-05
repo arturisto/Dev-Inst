@@ -1,0 +1,31 @@
+{
+
+  "personal_data":{
+      "name": "Arthur Ruthenberg",
+      "email": "arthurr.ie@gmail.com",
+      "contact_number": "052-9464352",
+      "city": "Holon"
+
+  },
+  "workplaces":[{"workplace_and_date" :"2018-Today:Consultant @ ConVista Consulting",
+                  "experience" : ["Implementations of SAP-TRM and MM projects. Analyzing key business process and providing with an SAP based solution.  ",
+                                  "Writing QA user stories, User guides and Business Blue Prints. ",
+                                  "Analyzing business data to provide key users with insightful information. ",
+                                  "Performing QA, system tests and UAT sessions ",
+                                  "Supervising user training "]},
+
+                {"workplace_and_date" :"2015-2018: Financial Information systems consultant @ IDF ",
+                  "experience" : ["SAP implementation at IDF. Writing developer blueprints, system QA, Top user training and support, system stabilization. ",
+                                  "Designing interfaces between various IDF financial and decision support systems. ",
+                                  "Budget and Purchasing Project Lead for SAP ERP implementation project. ",
+                                  "SAP ERP FI-FM-MM modules general support with managing the team's support to the users. "]
+                }
+    ],
+
+    "education": ["2020 – Developers Institute, Full Stack Python BootCamp ",
+                  "2017 – 2018 (GPA 91):  \nShenkar College of Design and Engineering \nM.sc at Industrial Engineering and Management, Industrial Management Major. ",
+                  "2009-2013:  \nBen Gurion University \nB.Sc. at Industrial Engineering and Management, Information Systems Major  "
+    ],
+    "software": ["HTML5","CSS3","JS,ESJ6","Python","Flask","SQL"],
+    "image":"static/photos/cookie_monster.jpg"
+}

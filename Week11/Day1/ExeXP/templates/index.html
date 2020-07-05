@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My CV</title>
+    <link  rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class = "container">
+        <h1 class = "main_head">{{personal['name']}}<span>&nbsp;&nbsp;&nbsp;{{personal['email']}}</span></h1>
+        <img src={{image}} class="profile_picture">
+        <br><br>
+        <div class="section" id = "personal">
+            <h4 class="section_headline">Personal Information</h4>
+            <ul>
+                <li>Contact Number: {{personal['contact_number']}}</li>
+                <li>Residence:    : {{personal['city']}}</li>
+            </ul>
+        </div>
+        <div class="section" id = "employmnet">
+            <h4 class="section_headline">Work Experience</h4>
+            <ul class="workplaces">
+                {% for workplace in workplaces %}
+                <li class = "workplace"> {{ workplace['workplace_and_date'] }}
+                    <ul>
+                        {% for experience in workplace['experience'] %}
+                        <li class = "workplace_data">{{ experience }}</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="section" id = "education">
+            <h4 class="section_headline">Education</h4>
+            <ul>
+                {% for edu in education %}
+                <li class = "education">{{edu}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+         <div class="section" id = "programming">
+            <h4 class="section_headline">Education</h4>
+            <ul>
+                {% for soft in software %}
+                <li class = "programming">{{soft}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

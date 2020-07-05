@@ -1,0 +1,32 @@
+{% extends "base_template.html" %}
+{% block body %}
+
+    <div class = "row">
+      <div class = "col-3 picture">
+        <img class="prod-image" src="/static/{{product['ProductPicUrl']}}" />
+      </div>
+        <div class = "col-9 data">
+            <h2>{{product['Name']}}</h2> <!-- name -->
+            <h5>supplier: {{product['SupplierName']}}</h5>
+            <h6>{{product['Price']}} {{product['CurrencyCode']}} </h6>
+
+          <div class = "description">
+            {{product['Description']}}
+            </div>
+            <br />
+            <br />
+          <div class = "tech-data">
+            <ul>
+              <li>Weight: {{product['WeightMeasure']}} {{product['WeightUnit']}}</li>
+              <li> Size:
+                  <ul>
+                    <li>Width: {{product['Width']}} {{product['DimUnit']}}  </li>
+                    <li>Depth: {{product['Depth']}} {{product['DimUnit']}}  </li>
+                    <li>Height: {{product['Height']}} {{product['DimUnit']}}</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            </div>
+      </div>
+{% endblock %}

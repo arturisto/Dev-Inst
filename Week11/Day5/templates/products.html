@@ -1,0 +1,35 @@
+{% extends "base_template.html" %}
+{% block body %}
+
+            <div class="row">
+            {% for product in products %}
+
+                      <div class="card" style = "padding:0px; height:400px;margin-left:auto; border:none">
+                          <a href="http://127.0.0.1:5000/products/{{product['Name']}}" class = "card-link">
+                          <img class="card-img-top" src="static/{{product['ProductPicUrl']}}" alt="Card image cap" style="width:250px; height:150px;">
+                          <p class="card-body">
+                            <h5 class="card-title">{{textwrap.shorten(product['Name'],width=30)}}</h5>
+                            <p class="card-text">
+                                <ul>
+                                    <li>Price: {{product['Price']}} {{product['CurrencyCode']}}</li>
+                                    <li>Status: {{product['Status']}}</li>
+                                </ul>
+                            </p>
+                            </a>
+                              <!-- <form method="POST" action="/products/add_to_cart"> -->
+                                {% if product['Status'] == "Available" %}
+                               <a href="/products/add_to_cart?productId={{product['ProductId']}}" class="btn btn-primary" ">Add to Cart</a>
+                                <!-- <label  >Add to Cart</label> -->
+                                  <!-- <input type="submit" class="btn btn-primary" value ="Add to cart" > -->
+                                {% else %}
+                                  <a href="#" class="btn btn-primary disabled">Add to Cart</a>
+                                {% endif %}
+                              <!-- </form> -->
+                          </p>
+
+                      </div>
+
+            {% endfor %}
+            </div>
+
+ {% endblock %}
