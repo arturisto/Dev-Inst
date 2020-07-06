@@ -16,15 +16,14 @@
                                 </ul>
                             </p>
                             </a>
-                              <!-- <form method="POST" action="/products/add_to_cart"> -->
+
                                 {% if product['Status'] == "Available" %}
-                               <a href="/products/add_to_cart?productId={{product['ProductId']}}" class="btn btn-primary" ">Add to Cart</a>
-                                <!-- <label  >Add to Cart</label> -->
-                                  <!-- <input type="submit" class="btn btn-primary" value ="Add to cart" > -->
+                               <a href="home/add_to_cart?productId={{product['ProductId']}}" class="btn btn-primary" ">Add to Cart</a>
+
                                 {% else %}
                                   <a href="#" class="btn btn-primary disabled">Add to Cart</a>
                                 {% endif %}
-                              <!-- </form> -->
+
                           </p>
 
                       </div>
