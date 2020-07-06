@@ -1,0 +1,38 @@
+{% extends "base_template.html" %}
+{% block body %}
+<form action="/proccessNewProduct" method="POST" enctype="multipart/form-data">
+      Product Id: <input class="form-control" type="text" name="id"><br>
+      Name: <input class="form-control" type="text" name="name"><br>
+    	Price: <input class="form-control"  type="text" name="price"><br>
+      Currency: <input class="form-control"  type="text" name="currency"><br>
+    	Description: <textarea name="description" class="form-control" rows=3 cols="40"></textarea><br>
+    	Image: <input type="file" class="form-control" name="image"><br>
+    	Stock: <input type="text" class="form-control" name="stock"><br>
+      Supplier Name: <input type="text" class="form-control" name="sup_name"><br>
+      Main Category: <select name="main_category">
+    		{% for row in categories["main_category"] %}
+    			<option value="{{row}}">{{row}}</option>
+    		{% endfor %}
+    	</select><br>
+      Category: <select name="category">
+        {% for row in categories["category"] %}
+          <option value="{{row}}">{{row}}</option>
+        {% endfor %}
+      </select><br>
+    	<input type="submit">
+</form>
+
+{% endblock %}
+
+
+
+"Category": "Laptops",
+"MainCategory": "Computer Systems",
+ "TaxTarifCode": "1",
+ "SupplierName": "Very Best Screens",
+ "WeightMeasure": 4.2,
+ "WeightUnit": "KG",
+"Width": 30,
+"Depth": 18,
+ "Height": 3,
+"DimUnit": "cm"},
