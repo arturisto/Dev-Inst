@@ -1,6 +1,10 @@
 {% extends "base_template.html" %}
 {% block body %}
-
+            {% for message in get_flashed_messages() %}
+            <div class="alert alert-secondary" role="alert">
+              {{message}}
+              </div>
+            {% endfor %}
             <div class="row">
             {% for product in products %}
 

@@ -40,14 +40,28 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="/products">Products <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/home">Products <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/shoppingCart">Shopping Cart</a>
           </li>
+          {% if session['admin']=='True' %}
           <li class="nav-item">
             <a class="nav-link" href="/addNewProduct">Add Product</a>
           </li>
+          {% endif %}
+          {% if 'user' not in session %}
+            <li class="nav-item">
+              <a class="nav-link" href="/login"> Log In/Sing Up</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <div class="nav-link" >Welcome {{session['user']}}</div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout"> Log out</a>
+        </li>
+            {% endif %}
         </ul>
       </div>
     </nav>
