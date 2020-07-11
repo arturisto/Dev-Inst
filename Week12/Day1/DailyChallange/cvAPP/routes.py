@@ -18,5 +18,4 @@ def build_cv():
        if request.form['template'] == "2":
            return flask.render_template("cvoutput2.html", cv=request.form)
 
-
     return flask.render_template("cvform.html")

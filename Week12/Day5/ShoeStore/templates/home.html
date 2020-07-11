@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block body %}
+<div class = "container">
+  {% for message in get_flashed_messages() %}
+         <div class="alert alert-secondary" role="alert">
+            {{message}}
+          </div>
+      {% endfor %}
+      <h2>Welcome to my Shoe Store</h2>
+    <form action = "{{url_for('go_to_main')}}" method='POST'>
+    <div class="form-row align-items-center">
+      <div class="col-auto my-1">
+        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name ="city">
+          <option selected>Choose city to order from:</option>
+          {% for city in cities %}
+          <option value="{{city}}" name ="city">{{city}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-auto my-1">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+  </div>
+{% endblock %}

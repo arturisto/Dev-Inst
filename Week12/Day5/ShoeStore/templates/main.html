@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block body %}
+<div class = "container">
+  <h2>Welcome to my {{city}} Shoe Store</h2>
+
+  <div class = "row">
+
+    {% for shoe in data %}
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{shoe['img']}}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{shoe['name']}} by {{shoe['brand']}}</h5>
+        <div class="card-text">
+              Price: {{shoe['price']}}
+              <form action = "{{url_for('update_cart')}}" method='POST'>
+              <div class="form-row align-items-center">
+                <div class="col-auto my-1">
+                  <select class="custom-select mr-sm-2" id="inlineFormCustomSelect"name ="color">
+                    <option selected>Choose color:</option>
+                    {% for color in shoe['colors'] %}
+                    <option value="{{color}}" >{{color}}</option>
+                    {% endfor %}
+                  </select>
+                  <select class="custom-select mr-sm-2" id="inlineFormCustomSelect"name ="size">
+                    <option selected>Choose shoe size:</option>
+                    {% for n in range(28,48,2) %}
+                    <option value="{{n}}" >{{n}}</option>
+                    {% endfor %}
+                  </select>
+                  <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name ="amount">
+                    <option selected>Choose amount:</option>
+                    {% for n in range(1,shoe['available']+1) %}
+                    <option value="{{n}}">{{n}}</option>
+                    {% endfor %}
+                  </select>
+
+                </div>
+                <div class="col-auto my-1">
+                  <input type = "hidden" name = "id" value = {{shoe['id']}} />
+                  <button type="submit" class="btn btn-primary">Order</button>
+                </div>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    </div>
+
+  </div>
+{% endblock %}

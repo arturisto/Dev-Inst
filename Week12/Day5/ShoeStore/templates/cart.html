@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block body %}
+
+  <form action = "{{url_for('convert_cart_to_order')}}" method='POST'>
+      <div class="form-row align-items-center">
+        <div class="col-auto my-1">
+            <input class="form-control" type="text" placeholder="Full Name" name = "name">
+            <input class="form-control" type="text" placeholder="Address" name = "address">
+        </div>
+        <div class="col-auto my-1">
+            <button type="submit" class="btn btn-primary">Place Order</button>
+        </div>
+      </div>
+  </form>
+    {% for shoe in cart %}
+    <div class="card" style="margin:15px">
+          <div class="row ">
+            <div class="col-md-4">
+                <img src="{{shoe['img']}}" style="width:250px;height:250px">
+              </div>
+              <div class="col-md-8 px-3">
+                <div class="card-block px-3">
+                  <h4 class="card-title">{{shoe['name']}} by {{shoe['brand']}}</h4>
+                  <p class="card-text">color: {{shoe['color']}}</p>
+                  <p class="card-text">Size: {{shoe['size']}}</p>
+                  <p class="card-text">Amount: {{shoe['amount']}}</p>
+                  <p class="card-text">Total Price: {{shoe['amount'] * shoe['price']}} ({{shoe['price']}} per piece)</p>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        {% endfor %}
+{% endblock %}
