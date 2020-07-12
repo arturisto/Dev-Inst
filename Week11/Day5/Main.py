@@ -17,6 +17,7 @@ f.close()
 app.jinja_env.globals.update(textwrap=textwrap)
 UPLOAD_FOLDER = "D:\Developers Institute\git\Week11\Day5\static\img"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config["SECRET_KEY"] = "123456789"
 for item in products:
     categories["main_category"].add(item['MainCategory'])
     categories["category"].add(item["Category"])
@@ -42,6 +43,7 @@ def add_to_cart():
         if request.args["productId"] == item['ProductId']:
             cart.append(item)
 
+    flash("Added to cart successfuly")
     return redirect("/home")
 
 
@@ -59,6 +61,7 @@ def add_new_product():
 def process_new_product():
     if request.method == "POST":
         if check_id(request):
+            # add message for proccess success
             pass
 
     return redirect("/home")
@@ -91,6 +94,81 @@ def check_id(req):
 
         with open("database/products.json", "w") as file:
             json.dump(products, file)
+
+
+@app.route("/login")
+def login():
+    return flask.render_template("/login.html")
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return flask.render_template("products.html", products=products)
+@app.route("/checkuser", methods=['POST', 'GET'])
+def check_users():
+    if request.method == "POST":
+        email = request.form["email"]
+        password = request.form["password"]
+        if "signin" in request.form:
+            if find_user(email):
+                flash("Email already registered, please user another")
+            else:
+                add_user(email, password)
+                if find_user(email):
+                    flash("signed successfull")
+
+                else:
+                    flash("sign in failed, please try again")
+
+        elif "login" in request.form:
+            if check_cred(email, password):
+                flash("login successfull")
+                return redirect("/home")
+            else:
+                flash("username or password is incorrect")
+                return redirect("/login")
+        else:
+            flash("I am sorry, I didn't understand your input. Please try again")
+
+    return redirect("/login")
+
+
+def find_user(email):
+    with open("database/users.json", "r") as file:
+        users = json.load(file)
+
+        for user in users:
+            if user["email"] == email:
+                return True
+        else:
+            return False
+
+
+def check_cred(email, password):
+    with open("database/users.json", "r") as file:
+        users = json.load(file)
+
+        for user in users:
+            if user["email"] == email:
+                if user["password"] == password:
+                    session["user"] = email
+                    if user["admin"] == 'True':
+                        session["admin"] = 'True'
+                    else:
+                        session['admin'] = 'False'
+                    return True
+                else:
+                    return False
+        else:
+            return False
+
+
+def add_user(email, password):
+    with open("database/users.json", "r+") as file:
+        json_data = json.load(file)
+        json_data.append({"email": email, "password": password, "admin": "False"})
+        file.seek(0)
+        json.dump(json_data, file)
 
 
 app.run()

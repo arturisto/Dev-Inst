@@ -33,47 +33,30 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/home"><i>Home Depot</i></a>
+        <a class="navbar-brand" href="/home"><i>Cool Shoe Shine</i></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="/home">Products <span class="sr-only">(current)</span></a>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/add">Add</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/shoppingCart">Shopping Cart</a>
+            <a class="nav-link" href="/find">Find</a>
           </li>
-          {% if session['admin']=='True' %}
-          <li class="nav-item">
-            <a class="nav-link" href="/addNewProduct">Add Product</a>
-          </li>
-          {% endif %}
-          {% if 'user' not in session %}
-            <li class="nav-item">
-              <a class="nav-link" href="/login"> Log In/Sing Up</a>
-            </li>
-          {% else %}
-            <li class="nav-item">
-              <div class="nav-link" >Welcome {{session['user']}}</div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/logout"> Log out</a>
-        </li>
-            {% endif %}
+
         </ul>
       </div>
     </nav>
-      <div class="row main">
-            <div class = "sidebar col-2">
-                Here will be a side navigation bar...sometimes in the future...i hope...
-            </div>
-            <div class = "mainwindow col-10">
+
+            <div class = "container">
+
             {% block body %}
             {% endblock %}
             </div>
-      </div>
+
 
 
      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
