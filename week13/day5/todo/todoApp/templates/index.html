@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block body %}
+
+<form method = 'POST' action = "/add_todo">
+  <div class="form-group row">
+    <label  class="col-sm-2 col-form-label">To Do</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="todo" placeholder="Your to do" name = "todo">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="submit" class="btn btn-primary" name="signin" value="signin">Add item</button>
+    </div>
+  </div>
+</form>
+
+<div>
+  <h2>Items to complete</h2>
+    <ul class="list-group">
+  {% for todo in todo_list %}
+    {% if todo['is_complete'] == False %}
+     <a href = "/complete/{{todo['id']}}" name = "complete" style = "text-decoration:none;margin-bottom:3px" ><li class="list-group-item list-group-item-danger">{{todo['todo']}}</li></a>
+     {% endif %}
+  {% endfor %}
+    </ul>
+    <h2>Completed items</h2>
+    <ul class="list-group">
+      {% for todo in todo_list %}
+        {% if todo['is_complete'] == True %}
+         <li class="list-group-item list-group-item-success" style = "text-decoration:none;margin-bottom:3px">{{todo['todo']}}</li>
+         {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+
+{% endblock %}
