@@ -16,7 +16,7 @@ def index():
 @app.route("/add_todo", methods=['POST', 'GET'])
 def add_todo():
     todo_item = Todo(request.form['todo'])
-    todo_item.save_todo()
+    todo_item.save_todo(request.form)
 
     return redirect('/home')
 

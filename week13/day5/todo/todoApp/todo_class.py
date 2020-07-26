@@ -11,9 +11,14 @@ class Todo():
     def get_todo_list(self):
         return model.Todo_list.query.all()
 
-    def save_todo(self):
+    def save_todo(self, form):
         my_model = model.Todo_list(todo=self.todo_text)
+        category = model.Category(name=form['category'])
+        my_model.category.append(category)
         db.session.add(my_model)
+        db.session.flush()
+        img = model.Image(image=form['Image'], todo_id=my_model.id)
+        db.session.add(img)
         db.session.commit()
 
     def complete_task(self, id):
