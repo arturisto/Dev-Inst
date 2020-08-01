@@ -1,0 +1,19 @@
+import flask
+import flask_sqlalchemy
+import flask_migrate
+from flask_login import LoginManager
+import os
+
+
+app = flask.Flask(__name__)
+
+app.config['SECRET_KEY'] = "secretKey"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(os.getcwd(), 'di_platform.db')
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
+db = flask_sqlalchemy.SQLAlchemy(app)
+migrate = flask_migrate.Migrate(app, db)
+from . import views, models
+
+
+
