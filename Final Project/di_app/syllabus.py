@@ -15,7 +15,7 @@ class Syllabus:
 
     """
     def __init__(self):
-        self.token = '7e9c4e01baaa109d232fc766137096b7a89f3acf'  # here comes token!! need to understand how to keep it secured and still online
+        self.token = ''  # here comes token!! need to understand how to keep it secured and still online
         self.owner = 'arturisto'
         self.g = Github(self.token)
         self.u = self.g.get_user()

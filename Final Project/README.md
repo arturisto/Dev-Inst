@@ -1,37 +1,54 @@
-# di_platform_reboot
+Learning management system
 
 basic structure:
 User Authentications:
-    1. Login page
-    2. Create user (only for administrator) 
-    3. Forget password page (requires authentication of email, username and birthday)
-    4. log out 
+    1. Login page (done) 
+    2. Update Profile (student/teacher)
+    3. Forget password page (Done )
+    4. log out (done)
+       
+Management System
+    1. User Management: (part of the user blueprint)
+        1. Create User (done)
+        2. Update User (done)
+        3. Delete User (done)
+    2. Content Management: (content blueprint)
+        1. Create Exercises (multiple answer choice)
+        2. Create Exercises (single answer - requires input)
+        3. Create Exams
+        4. Homework sheets 
 
-Home Page (contains some welcome information/intro)
-- Basic info (location, what you will need)
-- Announcements (cancelations, up coming holidays that affect class, special events)
-- Courses
-   - Python
-      - Full time                                  }
-          - weeks (lists all the weeks/topics)     } This structure repeats itself for all classes
-          - days (each day in the week             }
-      - Part time 
-   - JS
-      - Full time
-      - Part time
-   
-   - Front end
-  
+Content:
+    1. Free exercises hub:
+        1. Questions by topic
+        2. Free fro all questions
+    2. Exams:
+        1. Practice Exams
+        2. Real Exams
+    3.  Homework Sheets:
+        1. Presentation of homework sheets
+        2. Homework submission 
+        
 
 Features
-- Navbar
-    - Login/logout
-    - Courses (links to courses page)
-    - Profile
-        - my courses
-        - flagged lessons
-        - contact info
-- Social network widgets on footer
-- Admin update content on page
-- Embedded coding (bonus feature) -> just for python? Jupytor notebooks?
-- Portal for students to connect to other students (super bonus)
+    1. User "todo" list - items that a user marks for later review/todo
+    2. Submit email - hw submission will send an automatic email to the relevant teacher or/and TA 
+    3. Notifications (low priority - that's what slack is for...)
+    4. Automatic exam grading 
+    6. Time based practice exams and real exams
+    7. Olympiad system - scoring of students by how much practice they had
+    8. Classifying of practice by complexity level (more XP for more complexity)
+    9. Group olympiad system
+      
+        
+
+_--------------------------------
+Di learning app ..
+
+Course Structure (view):
+    1. Courses (homepage)
+    2. Weeks of a course
+    3. Days of a course sectioned by tabs.
+    4. Each day(tab) or other resources shows the entire list of activities for that day/resources
+    5. Class/Exercise/Activity loads an MD file from DB/DI learning github repo (tdb what is better, for now is github repo)
+    

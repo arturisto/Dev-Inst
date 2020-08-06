@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "base.html" %}
+{% block body %}
+<h1>The Eagle has landed </h1>
+
+{% if session['user'] %}
+    {% for blog in blogs %}
+
+    <div class="card">
+      <h6 class="card-header">Posted by {{blog.user.username}} on {{blog.publishing_date}}</h6>
+      <div class="card-body">
+        <h5 class="card-title">{{blog.blog_headline}}</h5>
+        <p class="card-text">{{blog.blog}}</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}

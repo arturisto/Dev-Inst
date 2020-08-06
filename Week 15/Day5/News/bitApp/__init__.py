@@ -9,7 +9,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///"+os.path.join(basedir, 'app.
 app.config['SECRET_KEY'] = "secretKey"
 db = flask_sqlalchemy.SQLAlchemy(app)
 migrate = flask_migrate.Migrate(app, db)
-login_mgr = flask_login.LoginManager(app)
+# login_mgr = flask_login.LoginManager(app)
 
 database_fn = "packages.json"
 from . import views,model

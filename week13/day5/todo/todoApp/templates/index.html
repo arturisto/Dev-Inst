@@ -41,7 +41,7 @@
     <ul class="list-group">
       {% for todo in todo_list %}
         {% if todo['is_complete'] == True %}
-         <li class="list-group-item list-group-item-success" style = "text-decoration: line-through;margin-bottom:3px">{{todo['todo']}}</li>
+         <li class="list-group-item list-group-item-success" style = "margin-bottom:3px">{{todo['todo']}}</li>
          {% endif %}
       {% endfor %}
     </ul>

@@ -8,7 +8,7 @@
 <h2>Congrats on deciding to take the course!</h2>
 <h4>Enter your information below to create you DI learning platform user:</h4>
 
-<form method="post" action="/signin">
+<form method="post" action="{{url_for('users.signin')}}">
     {{ form.name.label }}
     {{ form.name() }}
     <br>

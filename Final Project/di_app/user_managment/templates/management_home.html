@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+
+{% block title %} Sign Up {% endblock %}
+
+
+{% block body %}
+
+
+<!-----------------------start Tabs --------------------->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" href="#users" data-toggle="tab" id ="users-tab"   role="tab">User Management</a>
+
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#test"  data-toggle="tab" id ="test-tab" role="tab">Course Management</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#"  data-toggle="tab" id ="not-tab" role="tab">Notifications</a>
+  </li>
+
+</ul>
+<!-----------------------End Tabs --------------------->
+
+
+
+<!-----------------------Start Tab Content --------------------->
+<div class="tab-content " id="myTabContent">
+
+  <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
+      <br>
+
+      <!---create user---->
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#create_user_form" aria-expanded="false" aria-controls="collapseExample">
+          Create new User
+      </button><br><br>
+      <div class="collapse" id="create_user_form">
+            <form method="post" action="{{url_for('users.signup')}}">
+              <h4> Create new User</h4>
+              <table >
+                  <tbody>
+                  <tr>
+                      <td>{{ sign_up_form.name.label }}</td>
+                      <td>{{ sign_up_form.name() }}</td>
+                  </tr>
+                  <tr>
+                      <td>{{ sign_up_form.email.label }}</td>
+                      <td>{{ sign_up_form.email() }}</td>
+                  </tr>
+                   <tr>
+                      <td>{{ sign_up_form.username.label }}</td>
+                      <td>{{ sign_up_form.username() }}</td>
+                  </tr>
+                   <tr>
+                      <td>{{ sign_up_form.password.label }}</td>
+                      <td>{{ sign_up_form.password() }}</td>
+                  </tr>
+                  <tr>
+                      <td>{{ sign_up_form.confirm_pass.label }}</td>
+                      <td>{{ sign_up_form.confirm_pass() }}</td>
+                  </tr>
+                  <tr>
+                      <td>{{ sign_up_form.role.label }}</td>
+                      <td>{{ sign_up_form.role() }}</td>
+                  </tr>
+                  </tbody>
+              </table>
+              {{ sign_up_form.submit() }}
+          </form>
+      </div>
+                <!---update user---->
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#update_user_form" aria-expanded="false" aria-controls="collapseExample">
+          Update user
+      </button>
+
+      <div class="collapse" id="update_user_form">
+            <form method="post" action="/{{url_for('users.find_user')}}" id="u_user_find">
+                <br>
+                <label>Search by Email</label>
+                <input type="email" class="form-control" id="u_update_email" placeholder="Email">
+                <button class="btn btn-info btn-small" id = "upd_search_btn">Search</button>
+            </form>
+
+            <form method="post" action="{{url_for('users.update_user')}}" class = "d-none" id="u_update_form">
+              <h4> Update User</h4>
+              <table >
+                  <tbody>
+                  <tr>
+                      <td>{{ sign_up_form.name.label }}</td>
+                      <td>{{ sign_up_form.name(id="name_update") }}</td>
+                  </tr>
+                  <tr>
+                      <td>{{ sign_up_form.email.label }}</td>
+                      <td>{{ sign_up_form.email(id="email_update") }}</td>
+                  </tr>
+                   <tr>
+                      <td>{{ sign_up_form.username.label }}</td>
+                      <td>{{ sign_up_form.username(id="user_update") }}</td>
+                  </tr>
+                  <tr>
+                      <td>{{ sign_up_form.role.label }}</td>
+                      <td>{{ sign_up_form.role(id="role_update") }}</td>
+                  </tr>
+                   <input type="hidden" id="user_id" name="user_id">
+                  </tbody>
+              </table>
+              {{ sign_up_form.submit(value="update") }}
+          </form>
+       </div> <br><br>
+                      <!---Delete user---->
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#delete_user_form" aria-expanded="false" aria-controls="collapseExample">
+          Delete user
+      </button>
+        <div class="collapse" id="delete_user_form">
+            <form method="post" action="{{url_for('users.delete_user')}}" id="d_user_find">
+                <br>
+                <label>Search by Email</label>
+                <input type="email" class="form-control" id="user_delete_email" name = "d_email" placeholder="Email">
+                <button class="btn btn-info btn-small" id = "delete_btn">Delete</button>
+            </form>
+        </div>
+
+  </div>
+
+    <div class="tab-pane fade" id="test_tab" role="tabpanel" aria-labelledby="test-tab">
+          <div class="card p-3">
+              <h4></h4>
+            other hi there
+          </div>
+  </div>
+</div>
+
+<!-----------------------End Tab Content --------------------->
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+
+<script>
+$(document).ready(function()
+{
+    var user_email;
+    $("#upd_search_btn").click(function(){
+        event.preventDefault();
+        user_email = $("#u_update_email").val();
+        $.ajax({
+          type : 'POST',
+          url : "{{url_for('users.find_user')}}",
+          contentType: 'application/json;charset=UTF-8',
+          data : JSON.stringify(user_email),
+          success: function(response) {
+            console.log(response);
+            $('#u_user_find').addClass("d-none");
+            $('#u_update_form').removeClass("d-none");
+            $('#name_update').val(response['name']);
+            $('#email_update').val(response['email']);
+            $('#user_update').val(response['username']);
+            $('#role_update').val(response['role']);
+            $('#user_id').val(response['user_id']);
+
+            }
+        });
+
+     });
+});
+</script>
+{% endblock %}

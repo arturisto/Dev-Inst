@@ -203,7 +203,6 @@ def main():
     board.print_board()
     curr_player = 0
 
-
     print(f"Player {curr_player + 1} turn")
 
     while True:
