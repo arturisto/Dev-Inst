@@ -116,8 +116,8 @@
                 </table>
               </form>
         </div>
-        <button class="btn btn-primary" type="button" id="e_delete_show" data-toggle="collapse" data-target="#delete-exam" aria-expanded="false" aria-controls="collapseExample">
-            Create New Exam
+        <button class="btn btn-primary collapsed" type="button" id="e_delete_show" data-toggle="collapse" data-target="#delete-exam" aria-expanded="false" aria-controls="collapseExample">
+            Delete an Exam
         </button><br><br>
         <div class="collapse" id="delete-exam">
           <h4> Delete Exam</h4>
@@ -143,6 +143,7 @@
 $(document).ready(function(){
     $('#qtype').on('change',function(){
         if ($("#questions-tab").hasClass("active")){
+          // hide the multiple choice wrong answers when choosing a single entry exercise
             if ($(this).children("option:selected").val() =="SINGLE"){
                 for (i =1;i<=3; i++)
                 {
@@ -152,6 +153,7 @@ $(document).ready(function(){
                     $("label[for='wrong_answer"+i+"']").removeClass("d-inline")
                 }
             };
+            // #unhide the multiple choice wrong answers when choosing the multiple choice exercises
             if ($(this).children("option:selected").val() =="MULTI"){
 
                 for (i =1;i<=3; i++)
@@ -164,6 +166,7 @@ $(document).ready(function(){
 
         }
     });
+    // get exercises to delete by substring and show them as a list with checkbox to choose
     $('#q_delete_btn').click(function(){
         event.preventDefault();
         var search_key_string =  $("#q_delete").val();
@@ -189,12 +192,12 @@ $(document).ready(function(){
                      "<td>"+item[5]+"</td></tr>"
                 });
                 $("#form_delete_body").append(newRow)
-
                 }
-
         });
 
-    })
+    });
+
+    //show the data selected for deleteion and hide the search form
     $('#delete_btn').click(function(){
       if ($('#delete-question').hasClass("show")==false)
       {
@@ -206,52 +209,70 @@ $(document).ready(function(){
 
     });
 
-
+    //update exam creation form with the exercises from DB to choose from
     $('#e_create_show').click(function(){
       if ($(this).hasClass("collapsed") == false){
-        $.ajax({
-          type : 'POST',
-          url : "{{url_for('hub.get_questions_for_exam')}}",
-          contentType: 'application/json;charset=UTF-8',
-          // data : JSON.stringify(search_key_string),
-          success: function(response) {
-            var insertedHtml = '<tr><td><label for="q_chooser"> Choose questions to be added</label></td><td>\
-                                <table class="table" id="q_chooser">\
-                                  <thead>\
-                                    <tr>\
-                                      <th scope="col"></th>\
-                                      <th scope="col">Title</th>\
-                                      <th scope="col">Question Body</th>\
-                                      <th scope="col">Type</th>\
-                                      <th scope="col">Notion</th>\
-                                      <th scope="col">Complexity</th>\
-                                    </tr>\
-                                  </thead>\
-                                  <tbody>'
+            if(document.getElementById("q_chosing_table")){
+              $("#q_chosing_table").remove()
+              if ($("#delete-exam").hasClass("show")==true){
+                  $("#delete-exam").removeClass("show")
+                  $("#e_delete_show").addClass("collapsed")
+              }//end of if delete-exam
+              };
+            $.ajax({
+              type : 'POST',
+              url : "{{url_for('hub.get_questions_for_exam')}}",
+              contentType: 'application/json;charset=UTF-8',
 
+              success: function(response) {
+                //create the header of the table
+                var insertedHtml = '<tr id="q_chosing_table"><td ><label for="q_chooser"> Choose questions to be added</label></td><td>\
+                                    <table class="table" id="q_chooser">\
+                                      <thead>\
+                                        <tr>\
+                                          <th scope="col"></th>\
+                                          <th scope="col">Title</th>\
+                                          <th scope="col">Question Body</th>\
+                                          <th scope="col">Type</th>\
+                                          <th scope="col">Notion</th>\
+                                          <th scope="col">Complexity</th>\
+                                        </tr>\
+                                      </thead>\
+                                      <tbody>'
 
-            $.each(response,function(i,item){
-              insertedHtml +="<tr><td><input type='checkbox'class='form-check-input' value='"+item[0]+"' name='q_ID_"+item[0]+"'</td>"+
-                        "<td>"+item[1]+"</td>"+
-                        "<td>"+item[2]+"</td>"+
-                        "<td>"+item[3]+"</td>"+
-                        "<td>"+item[4]+"</td>"+
-                        "<td>"+item[5]+"</td></tr>"
-                                    });
+                //create the rows from the data recieved in the response
+                $.each(response,function(i,item){
+                  insertedHtml +="<tr><td><input type='checkbox'class='form-check-input' value='"+item[0]+"' name='q_ID_"+item[0]+"'</td>"+
+                            "<td>"+item[1]+"</td>"+
+                            "<td>"+item[2]+"</td>"+
+                            "<td>"+item[3]+"</td>"+
+                            "<td>"+item[4]+"</td>"+
+                            "<td>"+item[5]+"</td></tr>"
+                                        });
+                //close the table the row of the outer table
+                insertedHtml+='</tbody></table></td></tr>'
+                insert_after = $("#form_create_exam_body").find("tr").eq(3)
+                $(insertedHtml).insertAfter($(insert_after))
+              }
 
-            insertedHtml+='</tbody></table></td></tr>'
-            insert_after = $("#form_create_exam_body").find("tr").eq(3)
-            console.log(insertedHtml)
-            $(insertedHtml).insertAfter($(insert_after))
-          }
-        });
-
-
+          });
       }
 
+      });
 
-    })
-});
+      $("#e_delete_show").click(function(){
+        if ($("#e_delete_show").hasClass("collapsed") == true){
+              $("#create-exam").removeClass("show")
+
+
+        }//end of if has collapsed
+
+
+      }) //end of e_delete_exam click
+
+  }); //end of document
+
+
 
 </script>
 {% endblock %}
