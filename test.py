@@ -1,8 +1,18 @@
+from enum import Enum
+
+class Test(Enum):
+    STUDENT = "Student"
+    TEACHER = "Teacher"
+    ADMIN = "Admin"
+
+
+
 def main():
 
-    d = {"1":"2", "3":"4","5":"6"}
-    if "1" in d:
-        print("hi")
+    list = [(test.name, test.value) for test in Test]
+    print(list)
+
+
 
 if __name__ == "__main__":
     main()

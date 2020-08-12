@@ -122,7 +122,7 @@
 
   </div>
 
-    <div class="tab-pane fade" id="test_tab" role="tabpanel" aria-labelledby="test-tab">
+  <div class="tab-pane fade" id="test_tab" role="tabpanel" aria-labelledby="test-tab">
           <div class="card p-3">
               <h4></h4>
             other hi there
@@ -150,7 +150,6 @@ $(document).ready(function()
           contentType: 'application/json;charset=UTF-8',
           data : JSON.stringify(user_email),
           success: function(response) {
-            console.log(response);
             $('#u_user_find').addClass("d-none");
             $('#u_update_form').removeClass("d-none");
             $('#name_update').val(response['name']);

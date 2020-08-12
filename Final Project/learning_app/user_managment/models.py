@@ -13,8 +13,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(264), unique=True)
     email = db.Column(db.String(264), unique=True)
     password = db.Column(db.String(264))
-    role = db.Column(db.String(264))
-    test = db.Column(db.String(264))
+    role = db.Column(db.PickleType())
 
 
     def send_pass_link(self):

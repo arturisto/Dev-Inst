@@ -1,9 +1,10 @@
 import flask, flask_login
-import requests
-from .. import db, login_manager
+from .. import db
 from flask import request, flash, redirect, session, url_for, current_app, render_template
 from . import user_blueprint
 from . import forms, models
+from ..static.enums import UserType
+from ..static import constant_functions as const_func
 import jwt
 
 
@@ -44,8 +45,10 @@ def signin_view():
     return render_template("signin.html", form=form)
 
 
+# todo - dissable this function when platform is complete - only for testing!!
 @user_blueprint.route("/signup", methods=['POST', "GET"])
 def signup():
+
     form = forms.CreateUser()
     user = models.User.query.filter_by(username=form.username.data).first()
     if user:
@@ -54,13 +57,19 @@ def signup():
         elif user.username == form.email.data:
             flash("username is taken, please use another")
     else:
+        user_role = ''
+        for key in UserType:
+            if key.name == form.role.data:
+                user_role = key
+
         new_user = models.User(email=form.email.data, password=form.password.data,
-                               username=form.username.data, name=form.name.data, role=form.role.data)
+                               username=form.username.data, name=form.name.data, role=user_role)
         db.session.add(new_user)
         db.session.commit()
         # todo add check the user creation function
         print("user created successfully")
         flash("user created successfully")
+
 
         return redirect(url_for("main.index"))
 
@@ -136,12 +145,11 @@ def verify_access_token(token):
 @user_blueprint.route("/management")
 @flask_login.login_required
 def management_home_page():
-    if session['role'] not in ('admin', 'teacher'):
-        return flask.redirect(url_for("main.index"))
-    else:
+    if const_func.check_role(UserType.ADMIN):
         form = forms.CreateUser()
         return flask.render_template("management_home.html", sign_up_form=form)
-
+    else:
+        return flask.redirect(url_for("main.index"))
 
 @user_blueprint.route("/find_user", methods=['POST', "GET"])
 def find_user():
@@ -164,7 +172,7 @@ def update_user():
     user.role = form['role']
     user.username = form['username']
     db.session.commit()
-    return redirect("/management")
+    return redirect(url_for("users.management_home_page"))
 
 
 @user_blueprint.route("/delete_user", methods=['POST', 'GET'])

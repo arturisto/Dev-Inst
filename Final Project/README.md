@@ -4,7 +4,7 @@ basic structure:
 User Authentications:
     1. Login page (done) 
     2. Update Profile (student/teacher)
-    3. Forget password page (Done )
+    3. Forget password page (done)
     4. log out (done)
        
 Management System
@@ -13,9 +13,13 @@ Management System
         2. Update User (done)
         3. Delete User (done)
     2. Content Management: (content blueprint)
-        1. Create Exercises (multiple answer choice)
-        2. Create Exercises (single answer - requires input)
-        3. Create Exams
+        1. Create Exercises (multiple answer choice) (done)
+        2. Create Exercises (single answer - requires input) (done)
+        3. Delete Exercise (done)
+        4. Create Exam (done)
+            extras:
+            Make pagination for questions
+        5. Delete Exam
         4. Homework sheets 
 
 Content:
@@ -39,16 +43,8 @@ Features
     7. Olympiad system - scoring of students by how much practice they had
     8. Classifying of practice by complexity level (more XP for more complexity)
     9. Group olympiad system
+    10. Load exercises from excel sheet
       
         
 
-_--------------------------------
-Di learning app ..
 
-Course Structure (view):
-    1. Courses (homepage)
-    2. Weeks of a course
-    3. Days of a course sectioned by tabs.
-    4. Each day(tab) or other resources shows the entire list of activities for that day/resources
-    5. Class/Exercise/Activity loads an MD file from DB/DI learning github repo (tdb what is better, for now is github repo)
-    

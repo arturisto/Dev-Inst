@@ -1,6 +1,5 @@
-from di_app import create_app, models, db, forms
-
-app = create_app()
+from learning_app import create_app, models, db, forms
+app2 = create_app()
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app2.run(debug=True)

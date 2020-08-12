@@ -1,0 +1,257 @@
+{% extends 'base.html' %}
+
+{% block title %} Sign Up {% endblock %}
+
+
+{% block body %}
+
+
+<!-----------------------start Tabs --------------------->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" href="#questions" data-toggle="tab" id ="questions-tab"   role="tab">Question Manager</a>
+
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#exam"  data-toggle="tab" id ="exam-tab" role="tab">Create Exam</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#notion"  data-toggle="tab" id ="notion-tab" role="tab">Notions</a>
+  </li>
+
+</ul>
+<!-----------------------End Tabs --------------------->
+
+
+
+<!-----------------------Start Tab Content --------------------->
+<div class="tab-content " id="myTabContent">
+
+  <div class="tab-pane fade show active" id="questions" role="tabpanel" aria-labelledby="questions-tab">
+
+      <!------Questions ------>
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#create-question" aria-expanded="false" aria-controls="collapseExample">
+          Create New Question
+      </button><br><br>
+      <div class="collapse" id="create-question">
+        <h4> Create new Quetsion</h4>
+            <form method="POST" action="{{url_for('hub.create_quest')}}">
+                  <table>
+                      <tbody>
+                      {% for key in quest_form %}
+                          {% if key.label.text != 'CSRF Token' %}
+                          <tr>
+                              <td>{{key.label}}</td>
+                              <td>{{key(class = "form-control")}}</td>
+                          </tr>
+                          {% endif %}
+                      {% endfor %}
+                      </tbody>
+                  </table>
+
+            </form>
+      </div>
+      <!-----------------delete Question----------------->
+      <button class="btn btn-primary" type="button" id="delete_btn" data-toggle="collapse" data-target="#delete-question" aria-expanded="false" aria-controls="collapseExample">
+          Delete Question
+      </button><br><br>
+        <div class="collapse" id="delete-question">
+          <div id="delete-q1">
+              <h4> Delete Question</h4>
+              <form method="post" action="{{url_for('hub.find_questions_to_delete')}}" id="question-delete">
+                  <br>
+                  <label>Search by Email</label>
+                  <input type="text" class="form-control" id="q_delete" placeholder="Enter title" name = 'string_delete'>
+                  <button class="btn btn-info btn-small" id = "q_delete_btn">Search</button>
+              </form>
+            </div>
+
+        <div class="collapse d-none" id="delete-selection">
+                <h4> Select Questions to delete</h4>
+
+          <form  id ="form_delete_items"  method="POST" action="{{url_for('hub.delete_questions')}}" >
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">ID</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Question Body</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Notion</th>
+                  <th scope="col">Sub Notion</th>
+                  <th scope="col">Complexity level</th>
+                </tr>
+              </thead>
+              <tbody id = "form_delete_body">
+
+              </tbody>
+              </table>
+             <button type="submit" class="btn btn-primary">Delete</button>
+          </form>
+        </div>
+        </div>
+
+  </div>
+
+  <div class="tab-pane fade" id="exam" role="tabpanel" aria-labelledby="test-tab">
+
+        <button class="btn btn-primary" type="button" id="e_create_show" data-toggle="collapse" data-target="#create-exam" aria-expanded="false" aria-controls="collapseExample">
+            Create New Exam
+        </button><br><br>
+        <div class="collapse" id="create-exam">
+          <h4> Create new Exam</h4>
+              <form method="POST" action="{{url_for('hub.create_exam')}}">
+                <table>
+                    <tbody  id = "form_create_exam_body">
+                    {% for key in exam_form %}
+                        {% if key.label.text != 'CSRF Token' %}
+                        <tr>
+                            <td>{{key.label}}</td>
+                            <td>{{key(class = "form-control")}}</td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+              </form>
+        </div>
+        <button class="btn btn-primary" type="button" id="e_delete_show" data-toggle="collapse" data-target="#delete-exam" aria-expanded="false" aria-controls="collapseExample">
+            Create New Exam
+        </button><br><br>
+        <div class="collapse" id="delete-exam">
+          <h4> Delete Exam</h4>
+              <form method="POST" action="{{url_for('hub.delete_exam')}}">
+                <br>
+                <label>Search by title</label>
+                <input type="text" class="form-control" id="e_delete" placeholder="Enter title" name = 'string_delete'>
+                <button class="btn btn-info btn-small" id = "e_delete_btn">Search</button>
+              </form>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!-----------------------End Tab Content --------------------->
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+
+<script>
+$(document).ready(function(){
+    $('#qtype').on('change',function(){
+        if ($("#questions-tab").hasClass("active")){
+            if ($(this).children("option:selected").val() =="SINGLE"){
+                for (i =1;i<=3; i++)
+                {
+                    $('#wrong_answer'+i).addClass("d-none")
+                    $('#wrong_answer'+i).removeClass("d-inline")
+                    $("label[for='wrong_answer"+i+"']").addClass("d-none")
+                    $("label[for='wrong_answer"+i+"']").removeClass("d-inline")
+                }
+            };
+            if ($(this).children("option:selected").val() =="MULTI"){
+
+                for (i =1;i<=3; i++)
+                {
+                    $('#wrong_answer'+i).addClass("d-inline")
+                    $('#wrong_answer'+i).removeClass("d-none")
+                    $("label[for='wrong_answer"+i+"']").addClass("d-inline")
+                }
+            };
+
+        }
+    });
+    $('#q_delete_btn').click(function(){
+        event.preventDefault();
+        var search_key_string =  $("#q_delete").val();
+        $.ajax({
+          type : 'POST',
+          url : "{{url_for('hub.find_questions_to_delete')}}",
+          contentType: 'application/json;charset=UTF-8',
+          data : JSON.stringify(search_key_string),
+          success: function(response) {
+                $('#form_delete_body').empty()
+                $("#delete-q1").addClass("d-none")
+                $("#delete-q1").removeClass("d-block")
+                $("#delete-selection").removeClass("d-none")
+                $("#delete-selection").addClass("d-block")
+                var newRow=""
+                $.each(response,function(i,item){
+                  newRow +="<tr><td><input type='checkbox'class='form-check-input' value='"+item[0]+"' name='"+item[0]+"'</td>"+
+                     "<td>"+item[0]+"</td>"+
+                     "<td>"+item[1]+"</td>"+
+                     "<td>"+item[2]+"</td>"+
+                     "<td>"+item[3]+"</td>"+
+                     "<td>"+item[4]+"</td>"+
+                     "<td>"+item[5]+"</td></tr>"
+                });
+                $("#form_delete_body").append(newRow)
+
+                }
+
+        });
+
+    })
+    $('#delete_btn').click(function(){
+      if ($('#delete-question').hasClass("show")==false)
+      {
+          $('#delete-selection').addClass('d-none')
+          $('#delete-selection').removeClass('d-block')
+          $('#delete-q1').addClass('d-block')
+          $('#delete-q1').removeClass('d-none')
+      }
+
+    });
+
+
+    $('#e_create_show').click(function(){
+      if ($(this).hasClass("collapsed") == false){
+        $.ajax({
+          type : 'POST',
+          url : "{{url_for('hub.get_questions_for_exam')}}",
+          contentType: 'application/json;charset=UTF-8',
+          // data : JSON.stringify(search_key_string),
+          success: function(response) {
+            var insertedHtml = '<tr><td><label for="q_chooser"> Choose questions to be added</label></td><td>\
+                                <table class="table" id="q_chooser">\
+                                  <thead>\
+                                    <tr>\
+                                      <th scope="col"></th>\
+                                      <th scope="col">Title</th>\
+                                      <th scope="col">Question Body</th>\
+                                      <th scope="col">Type</th>\
+                                      <th scope="col">Notion</th>\
+                                      <th scope="col">Complexity</th>\
+                                    </tr>\
+                                  </thead>\
+                                  <tbody>'
+
+
+            $.each(response,function(i,item){
+              insertedHtml +="<tr><td><input type='checkbox'class='form-check-input' value='"+item[0]+"' name='q_ID_"+item[0]+"'</td>"+
+                        "<td>"+item[1]+"</td>"+
+                        "<td>"+item[2]+"</td>"+
+                        "<td>"+item[3]+"</td>"+
+                        "<td>"+item[4]+"</td>"+
+                        "<td>"+item[5]+"</td></tr>"
+                                    });
+
+            insertedHtml+='</tbody></table></td></tr>'
+            insert_after = $("#form_create_exam_body").find("tr").eq(3)
+            console.log(insertedHtml)
+            $(insertedHtml).insertAfter($(insert_after))
+          }
+        });
+
+
+      }
+
+
+    })
+});
+
+</script>
+{% endblock %}

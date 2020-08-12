@@ -2,7 +2,7 @@ import flask_wtf
 import wtforms as wtf
 from wtforms import validators as valid
 from wtforms.fields.html5 import EmailField
-
+from ..static.enums import UserType
 
 class CreateUser(flask_wtf.FlaskForm):
     """
@@ -14,7 +14,7 @@ class CreateUser(flask_wtf.FlaskForm):
     email = EmailField('Email', [valid.Email(message="Must enter valid email address")])
     password = wtf.PasswordField("Password", [valid.InputRequired(message="Must enter a password")])
     confirm_pass = wtf.PasswordField("Confirm Password", [valid.EqualTo(password, message="Passwords must match")])
-    role = wtf.SelectField("Role", choices=[("student", "Student"), ("ta", "Teacher"), ("admin", "Admin")])
+    role = wtf.SelectField("Role", choices=[(type.name, type.value) for type in UserType])
     submit = wtf.SubmitField('Sign Up')
 
 
