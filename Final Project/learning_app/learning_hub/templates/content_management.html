@@ -10,13 +10,12 @@
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" href="#questions" data-toggle="tab" id ="questions-tab"   role="tab">Question Manager</a>
-
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#exam"  data-toggle="tab" id ="exam-tab" role="tab">Create Exam</a>
+    <a class="nav-link" href="#exam"  data-toggle="tab" id ="exam-tab" role="tab">Exam Manager</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#notion"  data-toggle="tab" id ="notion-tab" role="tab">Notions</a>
+    <a class="nav-link" href="#tab-notion"  data-toggle="tab" id ="notion-tab" role="tab">Notions Manager</a>
   </li>
 
 </ul>
@@ -93,8 +92,8 @@
         </div>
 
   </div>
-
-  <div class="tab-pane fade" id="exam" role="tabpanel" aria-labelledby="test-tab">
+  <!-------------------------Exams------------------------------->
+  <div class="tab-pane fade" id="exam" role="tabpanel" aria-labelledby="exam-tab">
 
         <button class="btn btn-primary" type="button" id="e_create_show" data-toggle="collapse" data-target="#create-exam" aria-expanded="false" aria-controls="collapseExample">
             Create New Exam
@@ -121,16 +120,73 @@
         </button><br><br>
         <div class="collapse" id="delete-exam">
           <h4> Delete Exam</h4>
-              <form method="POST" action="{{url_for('hub.delete_exam')}}">
+              <form method="POST" action="{{url_for('hub.delete_exam_show')}}">
                 <br>
                 <label>Search by title</label>
                 <input type="text" class="form-control" id="e_delete" placeholder="Enter title" name = 'string_delete'>
                 <button class="btn btn-info btn-small" id = "e_delete_btn">Search</button>
               </form>
         </div>
+        <!-----------------delete exam--------------------->
+        <div class = "collapse" id="delete_exam_selection">
+          <h4> Select exams to delete</h4>
+
+              <form  id ="form_delete_exams"  method="POST" action="{{url_for('hub.delete_exam')}}" >
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col"></th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Notion</th>
+                        <th scope="col">Sub Notion</th>
+                        <th scope="col">Complexity level</th>
+                      </tr>
+                    </thead>
+                    <tbody id = "form_delete_exam_body">
+
+                    </tbody>
+                  </table>
+                 <button type="submit" class="btn btn-primary">Delete</button>
+              </form>
+          </div>
     </div>
+
+
+ <!-- -------------------Notions manager--------------- -->
+
+
+    <div class="tab-pane fade" id="tab-notion" role="tabpanel" aria-labelledby="notion-tab">
+          <!-- -------------show notions ------------ -->
+
+      <div class="" id="notions-show">
+        <h4> Available Notions</h4>
+
+        <form method="POST" action="{{url_for('hub.delete_notions')}}">
+              <table class = "table">
+                <thead>
+                  <tr>
+                    <th scope="col">Mark to delete</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Name</th>
+                    </tr>
+                  </thead>
+                  <tbody  id = "notions_body">
+
+                  </tbody>
+              </table>
+             <button type="submit" class="btn btn-primary">Delete</button>
+          </form>
+      </div>
+    </div>
+
+ <!----------------end of notions manager------->
+
+
+
   </div>
-</div>
+
 
 <!-----------------------End Tab Content --------------------->
 
@@ -223,7 +279,6 @@ $(document).ready(function(){
               type : 'POST',
               url : "{{url_for('hub.get_questions_for_exam')}}",
               contentType: 'application/json;charset=UTF-8',
-
               success: function(response) {
                 //create the header of the table
                 var insertedHtml = '<tr id="q_chosing_table"><td ><label for="q_chooser"> Choose questions to be added</label></td><td>\
@@ -268,8 +323,96 @@ $(document).ready(function(){
         }//end of if has collapsed
 
 
-      }) //end of e_delete_exam click
+      }); //end of e_delete_exam click
 
+
+
+      $('#e_delete_btn').click(function(){
+          event.preventDefault();
+          var search_key_string =  $("#e_delete").val();
+          $.ajax({
+            type : 'POST',
+            url : "{{url_for('hub.find_exams_to_delete')}}",
+            contentType: 'application/json;charset=UTF-8',
+            data : JSON.stringify(search_key_string),
+            success: function(response) {
+                  $('#form_delete_exam_body').empty()
+                  $("#delete-exam").addClass("d-none")
+                  $("#delete-exam1").removeClass("d-block")
+                  $("#delete_exam_selection").removeClass("d-none")
+                  $("#delete_exam_selection").addClass("d-block")
+                  var newRow=""
+                  $.each(response,function(i,item){
+                    newRow +="<tr><td><input type='checkbox'class='form-check-input' value='"+item[0]+"' name='"+item[0]+"'</td>"+
+                       "<td>"+item[0]+"</td>"+
+                       "<td>"+item[1]+"</td>"+
+                       "<td>"+item[2]+"</td>"+
+                       "<td>"+item[3]+"</td>"+
+                       "<td>"+item[4]+"</td>"+
+                       "<td>"+item[5]+"</td></tr>"
+                  });
+                  $("#form_delete_exam_body").append(newRow)
+                  }
+          });
+
+      });
+
+      $('#e_delete_btn').click(function(){
+          event.preventDefault();
+          var search_key_string =  $("#e_delete").val();
+          $.ajax({
+            type : 'POST',
+            url : "{{url_for('hub.find_exams_to_delete')}}",
+            contentType: 'application/json;charset=UTF-8',
+            data : JSON.stringify(search_key_string),
+            success: function(response) {
+                  $('#form_delete_exam_body').empty()
+                  $("#delete-exam").addClass("d-none")
+                  $("#delete-exam1").removeClass("d-block")
+                  $("#delete_exam_selection").removeClass("d-none")
+                  $("#delete_exam_selection").addClass("d-block")
+                  var newRow=""
+                  $.each(response,function(i,item){
+                    newRow +="<tr><td><input type='checkbox'class='form-check-input' value='"+item[0]+"' name='"+item[0]+"'</td>"+
+                       "<td>"+item[0]+"</td>"+
+                       "<td>"+item[1]+"</td>"+
+                       "<td>"+item[2]+"</td>"+
+                       "<td>"+item[3]+"</td>"+
+                       "<td>"+item[4]+"</td>"+
+                       "<td>"+item[5]+"</td></tr>"
+                  });
+                  $("#form_delete_exam_body").append(newRow)
+                  }
+          });
+          });
+
+      //Notions Show
+      $('#notion-tab').click(function(){
+          event.preventDefault();
+          $.ajax({
+            type : 'POST',
+            url : "{{url_for('hub.find_notions')}}",
+            contentType: 'application/json;charset=UTF-8',
+            success: function(response) {
+                  reponse_data = response[0]
+                  turn_index = response[1]
+                  $('#notions_body').empty()
+                  var newRow=""
+                  $.each(response,function(i,item){
+                    if(item[1]=='notion'){
+                      newRow +="<tr><td><input type='checkbox'class='form-check-input' value='"+item[0]+"' name='n_"+item[0]+"'</td>"+
+                         "<td>"+item[1]+"</td>"+
+                         "<td>"+item[2]+"</td></tr>"}
+                    else{
+                      newRow +="<tr><td><input type='checkbox'class='form-check-input' value='"+item[0]+"' name='sn_"+item[0]+"'</td>"+
+                         "<td>"+item[1]+"</td>"+
+                         "<td>"+item[2]+"</td></tr>"}
+                  });
+                  $("#notions_body").append(newRow)
+                  }
+          });
+
+      });
   }); //end of document
 
 

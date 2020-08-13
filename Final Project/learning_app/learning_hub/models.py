@@ -30,7 +30,7 @@ class Questions(db.Model):
     is_test_exam = db.Column(db.Boolean())
     level = db.Column(db.PickleType())
     time_for_completion = db.Column(db.Float())
-    exams = db.relationship("Exams", secondary="exams_to_questions", backref="Questions")
+    exams = db.relationship("Exams", secondary="exams_to_questions", back_populates ="questions")
 
 
 
@@ -42,7 +42,7 @@ class Exams(db.Model):
     exam_type = db.Column(db.PickleType())
     level = db.Column(db.PickleType())
     time_for_completion = db.Column(db.Float())
-    questions = db.relationship("Questions", secondary="exams_to_questions", backref="Exams")
+    questions = db.relationship("Questions", secondary="exams_to_questions", back_populates ="exams")
     notion_id = db.Column(db.Integer, db.ForeignKey("notions.id"))
     notion = db.relationship("Notions", back_populates="exam")
     sub_notion_id = db.Column(db.Integer, db.ForeignKey("subnotions.id"))

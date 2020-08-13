@@ -22,7 +22,7 @@ class CreateQuestion(flask_wtf.FlaskForm):
     is_test_exam = wtf.BooleanField("Is Test Exam")
     level = wtf.SelectField("Complexity level", [valid.InputRequired(message="Complexity is required")],
                             choices=[(type.name, type.value) for type in enums.QuestionComplexity])
-    time_for_completion = wtf.FloatField("Time for question(in minutes")  # todo - change to actual time
+    time_for_completion = wtf.FloatField("Time for completion",render_kw={"placeholder": "Time in minutes"})  # todo - change to actual time
     submit = wtf.SubmitField('Register Question')
 
 
@@ -43,5 +43,5 @@ class CreateExam(flask_wtf.FlaskForm):
     sub_notion = wtf.StringField("Enter new sub notion")
     level = wtf.SelectField("Complexity level", [valid.InputRequired(message="Complexity is required")],
                             choices=[(type.name, type.value) for type in enums.QuestionComplexity])
-    time = wtf.StringField("Exam time")  # todo - change to actual time
+    time = wtf.StringField("Exam time",render_kw={"placeholder": "Time in minutes"})  # todo - change to actual time
     submit = wtf.SubmitField('Register Exam')
