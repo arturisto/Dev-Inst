@@ -7,16 +7,17 @@ from . import model
 
 @app.route("/add")
 def add_user_page():
-    return flask.render_template("add_user.html")
+    return flask.render_template("index.html")
 
 
 @app.route("/add_user", methods=['POST', 'GET'])
 def add_user():
     if request.method == 'POST':
         form = request.form
-        mymodel = model.Person(name=form['name'], email=form['email'], phone_number=form['phone number'],
-                               address=form['Address'])
-        db.session.add(mymodel)
+
+        my_model = model.Person(name=form['name'], email=form['email'], phone_number=form['phone number'],
+                                address=form['Address'], nationality=form['nationality'])
+        db.session.add(my_model)
         db.session.commit()
 
     return redirect("/add")
@@ -39,6 +40,5 @@ def find_user():
         msg = f'name:{person.name}, address:{person.address}'
         flash(msg)
         print(person)
-
 
     return redirect("/find")

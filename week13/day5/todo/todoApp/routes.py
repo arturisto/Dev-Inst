@@ -28,3 +28,5 @@ def complete_todo(todo_id):
     todo.complete_task(todo_id)
     return redirect('/home')
 
+
+

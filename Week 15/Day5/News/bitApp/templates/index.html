@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block body %}
+
+    {% for crypto in data %}
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{crypto['name']}}</h5>
+            <p class="card-text">Symbol: {{crypto['symbol']}}</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Price: {{crypto['quote']['USD']['price']}} $</li>
+            <li class="list-group-item">Total Supply: {{crypto['total_supply']}}</li>
+            <li class="list-group-item">Circulating Supply: {{crypto['circulating_supply']}}</li>
+          </ul>
+          <div class="card-body">
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+    {% endfor %}
+{% endblock %}

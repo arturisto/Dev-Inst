@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body %}
+<form method = 'POST' action = "/login">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" name = "username" class="form-control" id="username" aria-describedby="username" placeholder="Enter username">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" name = "password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+     <small id="passHelp" class="form-text text-muted">We'll never share your password with anyone else.</small>
+  </div>
+  <button type="submit" class="btn btn-primary" name = "login">Log In</button>
+
+</form>
+{% endblock %}

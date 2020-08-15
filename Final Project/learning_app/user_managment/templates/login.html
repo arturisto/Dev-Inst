@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block body %}
+
+
+<h3>Login:</h3>
+<form method="post" action="{{url_for('users.login')}}">
+    {{ form.email.label }}
+    {{ form.email() }}
+
+    {{ form.password.label }}
+    {{ form.password() }}
+
+    {{ form.submit() }}
+
+</form>
+<small> Did you forget your password, again? <a href = "{{ url_for('users.renew_password') }}">Press here</a></small>
+<!--<h5>New to Developer's Institute? <a href="{{ url_for('users.signin_view') }}">Sign up!</a></h5>-->
+
+
+{% endblock %}

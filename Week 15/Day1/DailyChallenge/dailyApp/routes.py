@@ -7,7 +7,7 @@ from . import model
 
 @app.route("/index")
 def home():
-    return flask.render_template("/add_user.html")
+    return flask.render_template("/login.html")
 
 
 @app.route("/login", methods=['POST', "GET"])

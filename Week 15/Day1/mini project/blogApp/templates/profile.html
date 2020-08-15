@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block body %}
+here be user {{session['user']}} and dragons
+</br>
+The above user posted {{num_of_posts}} blogs and mostly uses the '{{common_tag}}' tag
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block body %}
+    <form method="POST" action="/post_blog">
+        {{form.headline.label}}</br>
+        {{form.headline(size=32)}}
+        </br>
+        {{form.blog_body.label}}</br>
+        {{form.blog_body}}
+
+         </br>
+        {{form.tags.label}}</br>
+        {{form.tags}}
+        </br>
+        {{form.submit()}}
+
+    </form>
+{% endblock %}
