@@ -7,6 +7,9 @@ from .. import db, login_manager, mail_manager
 import flask
 from flask import current_app
 
+
+
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(264))
@@ -14,7 +17,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(264), unique=True)
     password = db.Column(db.String(264))
     role = db.Column(db.PickleType())
-
+    class_id = db.Column(db.Integer, db.ForeignKey("class.id"))
+    class_name = db.relationship("Class", back_populates="users")
 
     def send_pass_link(self):
         payload = {
@@ -35,6 +39,15 @@ class User(db.Model, UserMixin):
 
         # Send it !
         mail_manager.send(msg)
+
+
+class Class(db.Model, UserMixin):
+    __tablename__="class"
+    id = db.Column(db.Integer, primary_key=True)
+    class_name = db.Column(db.String(264))
+    max_capacity = db.Column(db.Integer)
+    users = db.relationship("User", back_populates="class_name")
+
 
 
 @login_manager.user_loader

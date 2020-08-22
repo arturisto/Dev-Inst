@@ -48,7 +48,6 @@ def signin_view():
 # todo - dissable this function when platform is complete - only for testing!!
 @user_blueprint.route("/signup", methods=['POST', "GET"])
 def signup():
-
     form = forms.CreateUser()
     user = models.User.query.filter_by(username=form.username.data).first()
     if user:
@@ -67,9 +66,8 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
         # todo add check the user creation function
-        print("user created successfully")
-        flash("user created successfully")
 
+        flash("user created successfully")
 
         return redirect(url_for("main.index"))
 
@@ -105,7 +103,7 @@ def reset_password():
         return flask.render_template("reset_password.html", form=form, email=user.email)
 
 
-@user_blueprint.route("/change_password" , methods=['POST', "GET"])
+@user_blueprint.route("/change_password", methods=['POST', "GET"])
 def change_password():
     form = request.form
     try:
@@ -118,6 +116,8 @@ def change_password():
         return None
 
     return redirect(url_for("main.index"))
+
+
 def verify_access_token(token):
     try:
         user_id = jwt.decode(token,
@@ -146,10 +146,22 @@ def verify_access_token(token):
 @flask_login.login_required
 def management_home_page():
     if const_func.check_role(UserType.ADMIN):
-        form = forms.CreateUser()
-        return flask.render_template("management_home.html", sign_up_form=form)
+        form_create_user = forms.CreateUser()
+        return flask.render_template("management_home.html", sign_up_form=form_create_user,
+                                     student_list=set_students_as_Choices())
+
     else:
         return flask.redirect(url_for("main.index"))
+
+
+def set_students_as_Choices():
+    students = models.User.query.filter_by(role=UserType.STUDENT).all()
+    students_to_assign = {}
+    for s in students:
+        if not s.class_id:
+            students_to_assign[s.id] = [s.name, s.email]
+    return students_to_assign
+
 
 @user_blueprint.route("/find_user", methods=['POST', "GET"])
 def find_user():
@@ -157,9 +169,9 @@ def find_user():
     if request.method == "POST":
         user_email = request.json
         user = models.User.query.filter_by(email=user_email).first()
-
-        return {"email": user.email, "name": user.name, 'username': user.username, "role": user.role,
-                "user_id": user.id}
+        response = {"email": user.email, "name": user.name, 'username': user.username, "role": user.role,
+                    "user_id": user.id}
+        return response
     return user_email
 
 
@@ -183,3 +195,51 @@ def delete_user():
     db.session.commit()
 
     return redirect("/management")
+
+
+@user_blueprint.route("/create_new_class", methods=['POST', 'GET'])
+def create_new_class():
+    form = request.form
+    student_list = []
+    for key, value in form.items():
+        if "student_" in key:
+            student_list.append(models.User.query.filter_by(id=form[key]).first())
+
+    new_class = models.Class(class_name=form['class_name'], users=student_list)
+    db.session.add(new_class)
+    db.session.commit()
+    return redirect(url_for("main.index"))
+
+
+@user_blueprint.route("/find_class", methods=['POST', 'GET'])
+def find_class():
+    class_name = request.json
+    class_data = models.Class.query.filter_by(class_name=class_name).first()
+    response = {class_name: []}
+    for user in class_data.users:
+        response[class_name].append((user.id, user.name, user.email))
+    return response
+
+
+@user_blueprint.route("/delete_student", methods=['POST', 'GET'])
+def delete_student():
+    students_to_remove_from_class = request.form
+    students_to_remove_from_class = students_to_remove_from_class.to_dict(flat=False)
+    class_name = students_to_remove_from_class["class_name"]
+    del students_to_remove_from_class["class_name"]
+    for key, value in students_to_remove_from_class.items():
+        user = models.User.query.filter_by(id=value[0]).first()
+        user.class_id = None
+        db.session.commit()
+
+    check_delete_class(class_name)
+
+    return redirect(url_for("main.index"))
+
+
+def check_delete_class(class_name):
+    student_class = models.Class.query.filter_by(class_name=class_name[0]).first()
+
+    if not student_class.users:
+        db.session.delete(student_class)
+        db.session.commit()
