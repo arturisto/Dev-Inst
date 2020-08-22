@@ -9,7 +9,7 @@ from ..static import enums
 import jwt
 
 
-@learning_hub_bp.route("/main")
+@learning_hub_bp.route("/management")
 def learning_hub_main():
     if const_func.check_role(enums.UserType.ADMIN) or const_func.check_role(enums.UserType.TEACHER):
         quest_form = forms.CreateQuestion()
@@ -42,8 +42,8 @@ def find_questions_to_delete():
     questions = models.Questions.query.filter(models.Questions.question_title.contains(string_to_search)).all()
     response = {}
     for number, q in enumerate(questions):
-        response[number] = [q.id, q.question_title, q.question_text, enums.QuestionType[q.qtype].value, q.notion.notion,
-                            q.sub_notion.sub_notion, enums.QuestionComplexity[q.level].value]
+        response[number] = [q.id, q.question_title, q.question_text, q.qtype.value, q.notion.notion,
+                            q.sub_notion.sub_notion, q.level.value]
     return response
 
 

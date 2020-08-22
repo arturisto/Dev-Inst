@@ -12,6 +12,8 @@ Management System
         1. Create User (done)
         2. Update User (done)
         3. Delete User (done)
+        4. Create Class of students (done)
+        5. Delete students from class and delete empty class (done)
     2. Content Management: (content blueprint)
         1. Create Exercises (multiple answer choice) (done)
         2. Create Exercises (single answer - requires input) (done)
@@ -19,13 +21,14 @@ Management System
         4. Create Exam (done)
             extras:
             Make pagination for questions
-        5. Delete Exam
-        4. Homework sheets 
+        5. Assign Exam to class    
+        6. Delete Exam
+        7. Homework sheets 
 
 Content:
     1. Free exercises hub:
-        1. Questions by topic
-        2. Free fro all questions
+        1. Questions by topic (done)
+        2. Free for all questions (done)
     2. Exams:
         1. Practice Exams
         2. Real Exams
