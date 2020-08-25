@@ -6,6 +6,7 @@ from . import learning_hub_bp
 from . import forms, models
 from ..static import constant_functions as const_func
 from ..static import enums
+from ..user_managment import models as user_models
 import jwt
 
 
@@ -124,14 +125,9 @@ def get_list_of_questions(form):
     return questions
 
 
-@learning_hub_bp.route("/delete_exam_show", methods=['POST', 'GET'])
-def delete_exam_show():
-    exams = {}
-
-    return exams
 
 
-@learning_hub_bp.route("/find_exam_to_delete", methods=['POST', 'GET'])
+@learning_hub_bp.route("/find_exams_to_delete", methods=['POST', 'GET'])
 def find_exams_to_delete():
     string_to_search = request.json
     exams = models.Exams.query.filter(models.Exams.exam_title.contains(string_to_search)).all()
@@ -152,25 +148,63 @@ def delete_exam():
     return redirect(url_for("hub.learning_hub_main"))
 
 
+@learning_hub_bp.route("/get_cls_and_exams", methods=['POST', 'GET'])
+def get_cls_and_exams():
+    exams = models.Exams.query.all()
+    classes = user_models.Class.query.all()
+    response = {}
+    for cls in classes:
+        response[cls.id] = [cls.class_name, exams_to_add(cls, exams)]
+
+    return response
+
+
+def exams_to_add(cls, exams):
+    exams_to_return = []
+    for exam in exams:
+        if exam not in cls.exams:
+            exams_to_return.append([exam.id,exam.exam_title,exam.exam_type.value,exam.level.value])
+    return exams_to_return
+
+
+@learning_hub_bp.route("/assign_xm_to_cls", methods=['POST', 'GET'])
+def assign_xm_to_cls():
+    form = request.form
+    class_id = form['exam']
+    list_of_exams = []
+    for key,exam_id in form.items():
+        if "e_" in key:
+            list_of_exams.append(exam_id)
+
+    exams_to_add = models.Exams.query.filter(models.Exams.id.in_(list_of_exams)).all()
+    cls_to_update = user_models.Class.query.filter_by(id = class_id).first()
+    for exam in exams_to_add:
+        cls_to_update.exams.append(exam)
+    db.session.commit()
+
+    return redirect(url_for("hub.learning_hub_main"))
+
+
+
 @learning_hub_bp.route("/find_notions", methods=['POST', 'GET'])
 def find_notions():
     response = {}
     notions = models.Notions.query.all()
     for number, n in enumerate(notions):
-        response[number] = [n.id,"notion", n.notion]
+        response[number] = [n.id, "notion", n.notion]
     save_index = len(response)
 
     sub_notions = models.SubNotions.query.all()
     for number, sn in enumerate(sub_notions):
-        response[number + save_index] = [sn.id, "sub notion",sn.sub_notion]
+        response[number + save_index] = [sn.id, "sub notion", sn.sub_notion]
 
     return response
 
+
 @learning_hub_bp.route("/delete_notions", methods=['POST', 'GET'])
 def delete_notions():
-
     form = request.form
-    for key,id in request.form.items():
+    for key, id in request.form.items():
         if "sn" not in key:
             notion = models.Notions.query.filter_by(id=id).first()
             db.session.delete(notion)
