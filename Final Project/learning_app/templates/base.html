@@ -32,20 +32,14 @@
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Courses
+          Exercises
         </a>
 
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a><b>Python</b></a>
-          <a class="dropdown-item" href="/course/python full time">Full Time</a>
-          <a class="dropdown-item" href="/course/python part time">Part Time</a>
 
-          <div class="dropdown-divider"></div>
-          <a><b>Javascript</b></a>
-          <a class="dropdown-item" href="/course/JavaScript full time">Full Time</a>
-          <a class="dropdown-item" href="#">Part Time</a>
-          </div>
-        </li>
+          <a class="dropdown-item" href="{{url_for('hub.free_for_all_questions')}}">Free for All</a>
+          <a class="dropdown-item" href="{{url_for('hub.exe_by_notion')}}">By Notions</a>
+         </div>
          </ul>
       <ul class="navbar-nav ml-auto">
        {% if not session['user'] %}
@@ -55,9 +49,21 @@
 
        {% else %}
            {% if session['role'] == UserRoles.ADMIN %}
-           <li class="nav-item">
-              <a class="nav-link" href="{{url_for('users.management_home_page')}}">Management Area</a>
-           </li>
+           <li class="nav-item dropdown">
+             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Management Area
+             </a>
+
+             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+               <a><b>Users</b></a>
+               <a class="dropdown-item" href="{{url_for('users.management_home_page')}}">User Management</a>
+
+
+               <div class="dropdown-divider"></div>
+               <a><b>Content</b></a>
+               <a class="dropdown-item" href="{{url_for('hub.learning_hub_main')}}">Content Management</a>
+              </div>
+             </li>
           {% endif %}
           <li class="nav-item">
               <a class="nav-link" href="/profile">Profile {{session['user']}}</a>

@@ -6,10 +6,15 @@ from flask_mail import Message
 from .. import db, login_manager, mail_manager
 import flask
 from flask import current_app
+from ..user_managment.models import Class
 
 exams_to_questions = db.Table("exams_to_questions",
                               db.Column("quest_id", db.Integer, db.ForeignKey("questions.id")),
                               db.Column("exam_id", db.Integer, db.ForeignKey("exams.id")))
+
+exams_to_class = db.Table("exams_to_class",
+                          db.Column("exam_id", db.Integer, db.ForeignKey("exams.id")),
+                          db.Column("class_id", db.Integer, db.ForeignKey("class.id")))
 
 
 class Questions(db.Model):
@@ -30,9 +35,7 @@ class Questions(db.Model):
     is_test_exam = db.Column(db.Boolean())
     level = db.Column(db.PickleType())
     time_for_completion = db.Column(db.Float())
-    exams = db.relationship("Exams", secondary="exams_to_questions", back_populates ="questions")
-
-
+    exams = db.relationship("Exams", secondary="exams_to_questions", back_populates="questions")
 
 
 class Exams(db.Model):
@@ -42,13 +45,15 @@ class Exams(db.Model):
     exam_type = db.Column(db.PickleType())
     level = db.Column(db.PickleType())
     time_for_completion = db.Column(db.Float())
-    questions = db.relationship("Questions", secondary="exams_to_questions", back_populates ="exams")
+    questions = db.relationship("Questions", secondary="exams_to_questions", back_populates="exams")
     notion_id = db.Column(db.Integer, db.ForeignKey("notions.id"))
     notion = db.relationship("Notions", back_populates="exam")
     sub_notion_id = db.Column(db.Integer, db.ForeignKey("subnotions.id"))
     sub_notion = db.relationship("SubNotions", back_populates="exam")
+    classes = db.relationship("Class", secondary="exams_to_class", back_populates="exams")
 
 
+Class.exams = db.relationship("Exams", secondary="exams_to_class", back_populates="classes")
 
 
 class Notions(db.Model):

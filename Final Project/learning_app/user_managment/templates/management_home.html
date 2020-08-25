@@ -1,6 +1,7 @@
-{% extends 'base.html' %}
+ {% extends 'base.html' %}
 
 {% block title %} Sign Up {% endblock %}
+
 
 
 {% block body %}
@@ -13,7 +14,7 @@
 
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#test"  data-toggle="tab" id ="test-tab" role="tab">Course Management</a>
+    <a class="nav-link" href="#class"  data-toggle="tab" id ="test-tab" role="tab">Class Management</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="#"  data-toggle="tab" id ="not-tab" role="tab">Notifications</a>
@@ -31,7 +32,7 @@
       <br>
 
       <!---create user---->
-      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#create_user_form" aria-expanded="false" aria-controls="collapseExample">
+      <button class="btn btn-primary" type="button" data-toggle="collapse" onclick="user_view_manage('create_user_form')" data-target="#create_user_form" aria-expanded="false" aria-controls="collapseExample">
           Create new User
       </button><br><br>
       <div class="collapse" id="create_user_form">
@@ -65,21 +66,21 @@
                   </tr>
                   </tbody>
               </table>
-              {{ sign_up_form.submit() }}
+              {{ sign_up_form.submit(id= "usr_crt_btn") }}
           </form>
       </div>
                 <!---update user---->
-      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#update_user_form" aria-expanded="false" aria-controls="collapseExample">
+      <button class="btn btn-primary" type="button" data-toggle="collapse" onclick="user_view_manage('update_user_form')" data-target="#update_user_form" aria-expanded="false" aria-controls="collapseExample">
           Update user
       </button>
 
       <div class="collapse" id="update_user_form">
-            <form method="post" action="/{{url_for('users.find_user')}}" id="u_user_find">
+            <div  id="u_user_find">
                 <br>
                 <label>Search by Email</label>
-                <input type="email" class="form-control" id="u_update_email" placeholder="Email">
-                <button class="btn btn-info btn-small" id = "upd_search_btn">Search</button>
-            </form>
+                <input type="email" class="form-control" id="u_update_email" placeholder="Email" name="email">
+                <button type="submit" class="btn btn-info btn-small" id = "upd_search_btn" onclick="upd_user_search()">Search</button>
+            </div>
 
             <form method="post" action="{{url_for('users.update_user')}}" class = "d-none" id="u_update_form">
               <h4> Update User</h4>
@@ -101,14 +102,14 @@
                       <td>{{ sign_up_form.role.label }}</td>
                       <td>{{ sign_up_form.role(id="role_update") }}</td>
                   </tr>
-                   <input type="hidden" id="user_id" name="user_id">
+                   <input type="hidden" id="u_user_id" name="user_id">
                   </tbody>
               </table>
-              {{ sign_up_form.submit(value="update") }}
+              {{ sign_up_form.submit(value="update", id = "updt_btn") }}
           </form>
        </div> <br><br>
                       <!---Delete user---->
-      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#delete_user_form" aria-expanded="false" aria-controls="collapseExample">
+      <button class="btn btn-primary" type="button" data-toggle="collapse" onclick="user_view_manage('delete_user_form')" data-target="#delete_user_form" aria-expanded="false" aria-controls="collapseExample">
           Delete user
       </button>
         <div class="collapse" id="delete_user_form">
@@ -121,47 +122,110 @@
         </div>
 
   </div>
+<!------------------class management------------------->
+  <div class="tab-pane fade" id="class" role="tabpanel" aria-labelledby="class-tab">
 
-  <div class="tab-pane fade" id="test_tab" role="tabpanel" aria-labelledby="test-tab">
-          <div class="card p-3">
-              <h4></h4>
-            other hi there
+      <!------------------create Class----------------->
+          <button class="btn btn-primary" type="button" data-toggle="collapse" onclick="class_form()" data-target="#create_class_form" aria-expanded="false" aria-controls="collapseExample">
+              Create new Class
+          </button><br><br>
+
+          <div class="collapse" id="create_class_form">
+                <form method="post" action="{{url_for('users.create_new_class')}}" >
+                  <h4> Create new User and assign users</h4>
+                  <table >
+                      <tbody>
+                        <tr id = "class-name-group" class="form-group">
+                            <td><label for="class-name">Class Name</label></td>
+                            <td><input type = "text" class="form-group" id="class-name" placeholder="Enter class name" name ="class_name"/></td>
+                        </tr>
+                        <tr>
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Student's Name</th>
+                                <th scope="col">Student's Email</th>
+                              </tr>
+                            </thead>
+                            <tbody id = "form-add-s-to-class">
+
+                            </tbody>
+                            </table>
+                          </tr>
+                      </tbody>
+
+                  </table>
+
+                <button type="submit" class="btn btn-primary mb-2">Create Class</button>
+              </form>
           </div>
+
+          <!-----show class---->
+
+          <button class="btn btn-primary" onclick="show_class_view_manage()" type="button" data-toggle="collapse" data-target="#update_class_form" aria-expanded="false" aria-controls="collapseExample">
+              Search and update Class
+          </button><br><br>
+          <div class="collapse" id="update_class_form">
+                <form method="post" action="" id="class_find_form">
+                    <br>
+                    <label>Search by full class name</label>
+                    <input type="text" class="form-control" id="class_search_input" placeholder="Enter Class Name" name="class_name">
+                    <button type="submit" class="btn btn-info btn-small" id = "search_class_btn" onclick="search_class()">Search</button>
+                </form>
+                <div id = "class_show" class="d-none">
+                  <h4></h4>
+                  <form method="post" action="/users/delete_student" id="delete_student_form">
+                      <table class="table">
+                        <thead>
+                        <tr>
+                          <th scope="col"></th>
+                          <th scope="col">Student's Name</th>
+                          <th scope="col">Student's Email</th>
+                        </tr>
+                      </thead>
+                      <tbody id = "studnets_in_class">
+                      </tbody>
+                    </table>
+                    <input type="hidden" id="cls_name_hidden" name="class_name"></input>
+                    <button type="submit" class="btn btn-info btn-small" id="delete_student_from_class">Delete marked Students</button><br/>
+                    <small> Empty class will be automaticly deleted</small>
+                    </form>
+                  </div>
+
+          </div>
+
+
+
   </div>
 </div>
 
 <!-----------------------End Tab Content --------------------->
 
-<script
-  src="https://code.jquery.com/jquery-3.5.1.js"
-  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-  crossorigin="anonymous"></script>
+<!--------------scripts------------------->
 
-<script>
-$(document).ready(function()
-{
-    var user_email;
-    $("#upd_search_btn").click(function(){
-        event.preventDefault();
-        user_email = $("#u_update_email").val();
-        $.ajax({
-          type : 'POST',
-          url : "{{url_for('users.find_user')}}",
-          contentType: 'application/json;charset=UTF-8',
-          data : JSON.stringify(user_email),
-          success: function(response) {
-            $('#u_user_find').addClass("d-none");
-            $('#u_update_form').removeClass("d-none");
-            $('#name_update').val(response['name']);
-            $('#email_update').val(response['email']);
-            $('#user_update').val(response['username']);
-            $('#role_update').val(response['role']);
-            $('#user_id').val(response['user_id']);
 
-            }
-        });
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+crossorigin="anonymous"></script>
 
-     });
-});
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.3.0/math.min.js"></script>
+
+<script type="text/javascript" src="{{url_for('static', filename='users.js')}}"> </script>
+
+<Script>
+  function class_form(){
+    $("#form-add-s-to-class").empty()
+    check_toggle("update_class_form")
+    student_list = {{student_list|safe }}
+    var newRow = ""
+    for(var key in student_list){
+        newRow +="<tr><td><input type='checkbox'class='form-check-input' value='"+key+"' name='student_"+key+"'</td>"+
+           "<td>"+student_list[key][0]+"</td>"+
+           "<td>"+student_list[key][1]+"</td>"
+     }
+     $("#form-add-s-to-class").append(newRow)
+  }
+
+</Script>
 {% endblock %}

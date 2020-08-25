@@ -3,6 +3,9 @@ import wtforms as wtf
 from wtforms import validators as valid
 from wtforms.fields.html5 import EmailField
 from ..static.enums import UserType
+from .. import db
+from . import models
+
 
 class CreateUser(flask_wtf.FlaskForm):
     """
@@ -26,16 +29,21 @@ class Login(flask_wtf.FlaskForm):
     password = wtf.PasswordField('Password', [valid.InputRequired(message='Please enter password')])
     submit = wtf.SubmitField('Login')
 
+
 class password_reset(flask_wtf.FlaskForm):
     """
     Form for password Reset
     """
     email = wtf.HiddenField("user_email")
     password = wtf.PasswordField("Password", [valid.InputRequired(message="Must enter a password")],
-                                 render_kw={"class":"form-control"})
+                                 render_kw={"class": "form-control"})
     confirm_pass = wtf.PasswordField("Confirm Password",
                                      [valid.EqualTo(password, message="Passwords must match")],
                                      render_kw={"class": "form-control"}
                                      )
 
     submit = wtf.SubmitField('Sign Up', render_kw={"class": "btn btn-primary"})
+
+
+
+
