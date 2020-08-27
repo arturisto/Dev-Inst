@@ -15,7 +15,15 @@
     .dynamic-body {margin-top: 1em;}
     { background-color:ghostwhite;}
 
-  </style>
+      #examsubmitted{
+        height:200px;
+        width:400px;
+        top:-400px;
+        z-index: 100;
+        position:absolute;
+        transition: top 1s;
+      }
+    </style>
 </head>
 
 <body>
@@ -27,20 +35,34 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href=" {{ url_for('main.index') }}">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Exercises
-        </a>
+          <li class="nav-item active">
+            <a class="nav-link" href=" {{ url_for('main.index') }}">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Exercises
+            </a>
 
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-          <a class="dropdown-item" href="{{url_for('hub.free_for_all_questions')}}">Free for All</a>
-          <a class="dropdown-item" href="{{url_for('hub.exe_by_notion')}}">By Notions</a>
-         </div>
-         </ul>
+              <a class="dropdown-item" href="{{url_for('hub.free_for_all_questions')}}">Free for All</a>
+              <a class="dropdown-item" href="{{url_for('hub.exe_by_notion')}}">By Notions</a>
+             </div>
+           </li>
+
+           <li class="nav-item dropdown">
+             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Exams
+             </a>
+
+             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+               <a class="dropdown-item" href="{{url_for('hub.exams_main')}}">Exams</a>
+               <a class="dropdown-item" href="">Practice Exams</a>
+              </div>
+            </li>
+
+      </ul>
       <ul class="navbar-nav ml-auto">
        {% if not session['user'] %}
           <li class="nav-item">

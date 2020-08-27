@@ -60,7 +60,7 @@ function create_questions_list(response){
     }}  //end ese
     questions = shuffle(questions)
     var first_q = questions.shift()
-    print_question(first_q[0])
+    get_question(first_q[0])
     }
 
 
@@ -88,8 +88,10 @@ $(document).ready(function(){
   function get_next_question(){
     change_view("submit_giveup","btn_next_question")
     var next_question =questions.shift()
-    print_question(next_question[0])
+    get_question(next_question[0])
   }//end of get next question
+
+
 
   function submit_answer(qtype){
       if (qtype==multi){
@@ -132,7 +134,6 @@ $(document).ready(function(){
   }//end of submit
 
   function giveup(qtype){
-    console.log(qtype)
     if (qtype==multi){
       let id = current_question['id']
       correct_id = $(":radio[value='"+current_question['answer']+"']").attr("id")
@@ -151,13 +152,7 @@ $(document).ready(function(){
     $("#"+id_to_show).addClass("d-inline")
     $("#"+id_to_show).removeClass("d-none")
   }
-  function print_question(id){
-    $.ajax({
-      type : 'POST',
-      url : "/hub/get_q_by_id",
-      contentType: 'application/json;charset=UTF-8',
-      data: JSON.stringify(id),
-      success: function(response) {
+  function print_question(response){
         $("#notion").text(response["notion"])
         $("#subnotion").text(response["subnotion"])
         $("#qnumber").text(" Q#"+response["id"])
@@ -190,11 +185,20 @@ $(document).ready(function(){
               startTimer(current_question["time"]*60, display);
 
             }//end if tined
-      }//end of response
-    });
   } //end of print_questions
 
+  function get_question(id){
+    $.ajax({
+      type : 'POST',
+      url : "/hub/get_q_by_id",
+      contentType: 'application/json;charset=UTF-8',
+      data: JSON.stringify(id),
+      success: function(response) {
+          print_question(response)
+      }
 
+    });
+  }
   function get_q_by_notions()
   {
     selected_notion = $("#notions option:selected").text()

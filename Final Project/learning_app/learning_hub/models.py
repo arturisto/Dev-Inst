@@ -94,3 +94,12 @@ class SubNotions(db.Model):
             db.session.add(self)
             db.session.commit()
             return SubNotions.query.filter_by(sub_notion=self.sub_notion).first()
+
+
+class ExamScores(db.Model):
+    __tablename__="exam_scores"
+    id = db.Column(db.Integer, primary_key=True)
+    score = db.Column(db.Float)
+    student = db.Column(db.Integer, db.ForeignKey("user.id"))
+    exam = db.Column(db.Integer, db.ForeignKey("exams.id"))
+    is_score_published= db.Column(db.Boolean)
