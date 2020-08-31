@@ -1,11 +1,10 @@
 import flask
-import requests
-import mistune
-from . import forms, models, create_user
-from . import db
-from . import login_manager
-import flask_login  # LoginManager, login_user, login_required, logout_user, current_user
-from flask import request, flash, redirect, session
+from . import login_manager, mail_manager
+from flask_mail import Message
+from flask import request, flash, redirect, session, current_app
+from learning_app.learning_hub import models as hub_models
+from learning_app.user_managment import models as user_models
+from .static import enums
 
 main_blueprint = flask.Blueprint('main', __name__)
 
@@ -16,6 +15,35 @@ def index():
     home page, shows the list of courses
     :return:
     """
+
+    return flask.render_template('home.html')
+
+
+@main_blueprint.route("/contact_form", methods=['POST', 'GET'])
+def contact_form():
+    """
+    Sends an email to a predefined admin's email  with the contact
+    """
+    form = request.form
+    # Create a mail
+    msg = Message(
+        subject=f"Website contact by {form['full_name']}",
+        recipients=["arthurr.ie@gmail.com"],
+        body=f" {form['full_name']} has filled a contact form on the front page\r\n"
+             f"................ \r\n" \
+             f"Contact Deatils:\r\n" \
+             f"Email: {form['email']}\r\n" \
+             f"Phone Number: {form['phone']}\r\n" \
+             f"................\r\n" \
+             f"Message:\r\n" \
+             f"{form['text']}\r\n",
+        sender=current_app.config["MAIL_USERNAME"]
+    )
+
+    # Send it !
+    mail_manager.send(msg)
+
+    flash("we have received, someone will contact you ASAP")
     return flask.render_template('home.html')
 
 
@@ -25,4 +53,7 @@ def index():
 def unauthorized():
     return "This place is not for you, please leave"
 
+
 # # ----------------------End of error routes------------------------------------#
+
+

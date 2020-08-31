@@ -112,7 +112,7 @@ def create_response(questions, timer):
 def exams_main():
     if session["role"] != enums.UserType.STUDENT:
         flash("This is student area, teachers and admins belong in management", category="student_vs_teachers")
-        return render_template("exams.py")
+        return render_template("exams.html")
 
     student_email = session['user_email']
     student_class = user_models.User.query.filter_by(email=student_email).first()

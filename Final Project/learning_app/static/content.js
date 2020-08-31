@@ -124,7 +124,7 @@ function e_delete_show(){
   if($("#delete-exam").hasClass("show")){
     $("#form_delete_exam_body").empty()
     change_view("delete-exam-search","delete_exam_selection")
-  
+
   }
   else{
 
@@ -252,6 +252,7 @@ function prnt_assign_exms_to_cls(){
   event.preventDefault();
   let selected_cls = $("#classes option:selected").val()
   let newRow=""
+  $("#tbl_exm_to_cls").empty()
   for (exam of exams_to_class[selected_cls][1]){
     newRow +="<tr><td><input type='checkbox'class='form-check-input' value='"+exam[0]+"' name='e_"+exam[0]+"'</td>"+
        "<td>"+exam[1]+"</td>"+
