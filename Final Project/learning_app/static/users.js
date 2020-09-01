@@ -43,6 +43,10 @@ function user_view_manage(clicked_id){
             change_view("u_user_find","u_update_form")
             }
         }
+
+        if (document.getElementById("alert")){
+            $("#alert").remove()
+        }
 }
 function clear_input(id){
   $("#"+id+" input").val("")
@@ -78,7 +82,10 @@ function upd_user_search(){
       $('#user_update').val(response['username']);
       $('#role_update').val(response['role']);
       $('#u_user_id').val(response['user_id']);
-      }
+    },
+    error:function(){
+      insert_error("Requested email wasn't found", "u_update_email")
+    }
   });
 }
 
@@ -110,6 +117,11 @@ function show_class_view_manage(){
     check_toggle("create_class_form")
     $("#class_search_input").val("")
   }
+  else{
+    change_view("class_find_form","delete_student_form")
+    $("#class_search_input").val("")
+    $("#studnets_in_class").empty()
+  }
 
 }
 function change_view(id_to_show,id_to_hide){
@@ -126,4 +138,11 @@ function check_toggle(id){
     return true
   }
   else{return false}
+}
+
+function insert_error(msg,elem_before_error){
+
+  let html_to_add = '<div class="alert alert-danger small-alert" id ="alert" role="alert">'+msg+'</div>'
+  $(html_to_add).insertAfter("#"+elem_before_error)
+
 }

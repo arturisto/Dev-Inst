@@ -57,3 +57,6 @@ def unauthorized():
 # # ----------------------End of error routes------------------------------------#
 
 
+@main_blueprint.route('/under_const')
+def under_const():
+    return flask.render_template("under_construction.html")

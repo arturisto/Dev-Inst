@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block title %} Practice Questions {% endblock %}
-
+{% block head %}
+  <link rel="stylesheet" href="/static/styles/cross_style.css">
+{% endblock %}
 {% block body %}
 <Script>
   let timed = confirm("Would you like the questions to be timed?");
