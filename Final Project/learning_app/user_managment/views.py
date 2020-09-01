@@ -5,6 +5,7 @@ from . import user_blueprint
 from . import forms, models
 from ..static.enums import UserType
 from ..static import constant_functions as const_func
+from ..learning_hub import models as hub_models
 import jwt
 
 
@@ -30,13 +31,15 @@ def login():
             session['role'] = user.role
             flash("login complete, great success!")
             flask_login.login_user(user)
+            if user.role == UserType.ADMIN:
+                return flask.render_template("admin.html")
             return redirect(url_for("main.index"))
         else:
-            flask.flash("password is in correct")
-            return redirect("/login_show")
+            flask.flash("password is in correct",  category="password")
+            return redirect(url_for("users.login_show"))
     else:
-        flask.flash("user doesn't exists, try again or sign in")
-        return redirect("/login_show")
+        flask.flash("email doesn't exists", category= "user")
+        return redirect(url_for("users.login_show"))
 
 
 @user_blueprint.route("/signin_show")
@@ -88,8 +91,13 @@ def renew_password():
 @user_blueprint.route("/send_pass_link", methods=['POST', "GET"])
 def send_pass_link():
     user = models.User.query.filter_by(email=request.form['email']).first()
-    user.send_pass_link()
-    return redirect(url_for("main.index"))
+
+    if user:
+        user.send_pass_link()
+        return redirect(url_for("main.index"))
+    else:
+        flask.flash("email doesn't exists", category="user")
+        return redirect(url_for("users.renew_password"))
 
 
 @user_blueprint.route("/reset_password")
@@ -243,3 +251,75 @@ def check_delete_class(class_name):
     if not student_class.users:
         db.session.delete(student_class)
         db.session.commit()
+
+
+@user_blueprint.route("/admin_landing_page", methods=['POST', 'GET'])
+def admin_landing_page():
+    response = {}
+    students = models.User.query.filter_by(role=UserType.STUDENT).all()
+    classes = models.Class.query.all()
+    questions = hub_models.Questions.query.all()
+    exams = hub_models.Exams.query.all()
+    exam_scores = hub_models.ExamScores.query.all()
+    notions = hub_models.Notions.query.all()
+    num_of_students = len(students)
+    response['num_of_students'] = num_of_students
+    num_of_questions = len(questions)
+    response['num_of_questions'] = num_of_questions
+    num_of_classes = len(classes)
+    response['num_of_classes'] = num_of_classes
+    response['students_by_class'] = get_studnets_by_class(students, classes)
+    response['avg_score_by_exam'] = get_avg_score_by_exam(exams, exam_scores)
+    response['q_by_notion'] = get_q_by_notion(questions, notions)
+    return response
+
+
+def get_studnets_by_class(students, classes):
+    classes_by_studedents = {}
+    for cls in classes:
+        if cls.class_name not in classes_by_studedents:
+            classes_by_studedents[cls.class_name] = {'stdnt_amnt': 0}
+
+        for student in students:
+            if student.class_name == cls:
+                classes_by_studedents[cls.class_name]['stdnt_amnt'] += 1
+
+        classes_by_studedents[cls.class_name]['max_capacity'] = cls.max_capacity
+    return classes_by_studedents
+
+
+def get_avg_score_by_exam(exams, exam_scores):
+    scores_by_exam = {}
+    num_of_exam_takers = 0
+    for exam in exams:
+        exam_total = 0
+        num_of_exam_takers = 0
+        for student_score in exam_scores:
+            if student_score.exam == exam.id:
+                exam_total += student_score.score
+                num_of_exam_takers += 1
+        if num_of_exam_takers > 0:
+            scores_by_exam[exam.exam_title] = exam_total / num_of_exam_takers
+
+    return scores_by_exam
+
+
+def get_q_by_notion(questions, notions):
+    q_by_notion = {}
+
+    for notion in notions:
+        if notion.notion not in q_by_notion:
+            q_by_notion[notion.notion] = 0
+
+        for q in questions:
+            if q.notion_id == notion.id:
+                q_by_notion[notion.notion] += 1
+    return q_by_notion
+
+@user_blueprint.route("/admin_page", methods=['POST', 'GET'])
+def admin_page():
+
+    if session['role']==UserType.ADMIN:
+        return flask.render_template("admin.html")
+    else:
+        return redirect(url_for("main.home"))

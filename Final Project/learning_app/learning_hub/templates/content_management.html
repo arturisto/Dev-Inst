@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %} Sign Up {% endblock %}
-
-
+{% block title %} Content Management {% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="/static/styles/cross_style.css">
+{% endblock %}
 {% block body %}
-
+<div class = "jumbotron w-75">
 
 <!-----------------------start Tabs --------------------->
 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -41,7 +42,7 @@
                           {% if key.label.text != 'CSRF Token' %}
                           <tr>
                               <td>{{key.label}}</td>
-                              <td>{{key(class = "form-control")}}</td>
+                              <td>{{key()}}</td>
                           </tr>
                           {% endif %}
                       {% endfor %}
@@ -86,7 +87,7 @@
 
               </tbody>
               </table>
-             <button type="submit" class="btn btn-primary">Delete</button>
+             <button type="submit" class="btn btn-danger">Delete</button>
           </form>
         </div>
         </div>
@@ -108,7 +109,7 @@
                         {% if key.label.text != 'CSRF Token' %}
                         <tr>
                             <td>{{key.label}}</td>
-                            <td>{{key(class = "form-control")}}</td>
+                            <td>{{key()}}</td>
                         </tr>
                         {% endif %}
                     {% endfor %}
@@ -201,7 +202,7 @@
               <table class = "table">
                 <thead>
                   <tr>
-                    <th scope="col">Mark to delete</th>
+                    <th scope="col" class="w-25">Mark to delete</th>
                     <th scope="col">Type</th>
                     <th scope="col">Name</th>
                     </tr>
@@ -223,6 +224,7 @@
 
 <!-----------------------End Tab Content --------------------->
 
+  </div>
 <script
   src="https://code.jquery.com/jquery-3.5.1.js"
   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="

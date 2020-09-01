@@ -42,7 +42,7 @@ class password_reset(flask_wtf.FlaskForm):
                                      render_kw={"class": "form-control"}
                                      )
 
-    submit = wtf.SubmitField('Sign Up', render_kw={"class": "btn btn-primary"})
+    submit = wtf.SubmitField('Enroll Me', render_kw={"class": "btn btn-primary"})
 
 
 

@@ -21,8 +21,8 @@ Management System
         4. Create Exam (done)
             extras:
             Make pagination for questions
-        5. Assign Exam to class    
-        6. Delete Exam
+        5. Assign Exam to class (done)   
+        6. Delete Exam (done)
         7. Homework sheets 
 
 Content:

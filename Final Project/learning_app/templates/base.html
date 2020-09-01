@@ -9,13 +9,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <style>
-    pre{ background-color:ghostwhite;}
-    .dynamic-body {margin-top: 1em;}
-    .jumbotron{background-color:white}
-    .dynamic-body {margin-top: 1em;}
-    { background-color:ghostwhite;}
-
-  </style>
+      body{
+        background-color:ghostwhite;
+      }
+      #examsubmitted{
+        height:200px;
+        width:400px;
+        top:-400px;
+        z-index: 100;
+        position:absolute;
+        transition: top 1s;
+      }
+      .container-fluid{
+        display:flex;
+        justify-content: center;
+      }
+    </style>
+    {% block head %}
+    {% endblock %}
 </head>
 
 <body>
@@ -27,20 +38,35 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href=" {{ url_for('main.index') }}">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Exercises
-        </a>
+          <li class="nav-item active">
+            <a class="nav-link" href=" {{ url_for('main.index') }}">Home <span class="sr-only">(current)</span></a>
+          </li>
+          {% if session['role'] %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Exercises
+            </a>
 
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-          <a class="dropdown-item" href="{{url_for('hub.free_for_all_questions')}}">Free for All</a>
-          <a class="dropdown-item" href="{{url_for('hub.exe_by_notion')}}">By Notions</a>
-         </div>
-         </ul>
+              <a class="dropdown-item" href="{{url_for('hub.free_for_all_questions')}}">Free for All</a>
+              <a class="dropdown-item" href="{{url_for('hub.exe_by_notion')}}">By Notions</a>
+             </div>
+           </li>
+
+           <li class="nav-item dropdown">
+             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Exams
+             </a>
+
+             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+               <a class="dropdown-item" href="{{url_for('hub.exams_main')}}">Exams</a>
+               <a class="dropdown-item" href="">Practice Exams</a>
+              </div>
+            </li>
+            {% endif %}
+      </ul>
       <ul class="navbar-nav ml-auto">
        {% if not session['user'] %}
           <li class="nav-item">
@@ -49,6 +75,9 @@
 
        {% else %}
            {% if session['role'] == UserRoles.ADMIN %}
+           <li class="nav-item active">
+             <a class="nav-link" href="#">Admin Dashboard</a>
+           </li>
            <li class="nav-item dropdown">
              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                Management Area
@@ -78,10 +107,10 @@
 </nav>
 
 <div class="container-fluid dynamic-body">
-  <div class = "jumbotron w-75 m-auto">
+
       {% block body %}
       {% endblock %}
-    </div>
+
 </div>
 
 <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->

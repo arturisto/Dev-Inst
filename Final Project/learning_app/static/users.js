@@ -37,7 +37,7 @@ function user_view_manage(clicked_id){
         clear_input("delete_user_form")
       }
 
-        check_toggle("#create_user_form")
+        check_toggle("create_user_form")
         if (check_toggle("update_user_form")){
             clear_updt_form()
             change_view("u_user_find","u_update_form")

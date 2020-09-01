@@ -1,11 +1,227 @@
 {% extends 'base.html' %}
 
 {% block title %} Home {% endblock %}
-
+{% block head %}
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles/home.css">
+{% endblock %}
 {% block body %}
-<div class = "jumbotron">
+<div class = "jumbotron w-75">
 
-    <h3>hi there</h3>
+    {% if session['role'] == "Student" %}
+    <h3>Start Learning!</h3>
+    {% elif session['role'] =='Teacher' %}
+    <h3> Hello Teacher</h3>
+
+    {% elif session['role'] == 'Admin' %}
+        <h3>Admin Dashboard</h3>
+        <div class = "row">
+          <div class="col-4">
+            <div class = "circle vertical">
+              <div class=" ">
+                <h1 class="card-text"id = "studnets"></h1>
+              </div>
+              <div>
+                <i>Enrolled Students</i>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class = "circle vertical">
+              <div class=" ">
+                <h1 class="card-text"id = "classes"></h1>
+              </div>
+              <div>
+              <i>  Classes</i>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class = "circle vertical">
+              <div class=" ">
+                <h1 class="card-text"id = "questions"></h1>
+              </div>
+              <div>
+              <i>  Questions Created</i>
+              </div>
+            </div>
+          </div>
+          </div>
+        <p id= "admin"></p>
+
+
+        <div id="q2n_chart_div"></div>
+        <div class="row">
+          <div class=col-6" id="score2exam_chart"></div>
+          <div class=col-6" id="stdnt2class_chart"></div>
+        </div>
+    {% else %}
+    <div class="header" style="color:white">
+        <h1>Hello Stranger!</h1><br />
+        <h1>Welcome to my Learning Platform</h1>
+        <br />
+        <h2> Would you like to learn with me?<br /> Then click <a href="#contact_form" id="click-here" class="click-here" >here</a> to fill a contact form, and someone will get back to you!</h2>
+      </div>
+      <div class = "landing_data mb-5">
+        <ul class="list-group">
+          <li>📚 The largest database of questions - more than 10,000 questions, updated regulary</li>
+          <li>🤓 Most Ad Hoc exams corresponding to the latest content</li>
+          <li>💻 User friendly platform and learning experience </li>
+        </ul>
+
+        </div>
+      <div style="color:white">
+        <h2>Our Testimonials</h2>
+        </Div>
+      <div id = "testimonials" class="row mt-1">
+        <div class="card col-3 border border-info" style="width: 18rem;">
+          <img class="card-img-top" src="static/images/testimonials/person5.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">John Wick</h5>
+            <p class="card-text">This platform helped me to get over my dog being taken by russion mobesters</p>
+          </div>
+        </div>
+        <div class="card col-3 border border-info" style="width: 18rem;">
+          <img class="card-img-top" src="static/images/testimonials/person2.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Jean Doe</h5>
+            <p class="card-text">This platform helped me to study and strengthen my skills for upcoming test</p>
+          </div>
+        </div>
+        <div class="card col-3 border border-info" style="width: 18rem;">
+          <img class="card-img-top" src="static/images/testimonials/person4.jpg" alt="Card image cap">
+          <div class="card-body" style="color:white">
+            <h5 class="card-title" >Plonit Almonit</h5>
+            <p class="card-text">Once I found this platform, I knew that it will help me achieve my goals.Now I work as Full Stack Developer!</p>
+          </div>
+        </div>
+
+      </div>
+    <div class="w-50" id = "contact_form">
+      <h2 id="contact-form">Contact Form</h2>
+        <form method="POST" action = "{{url_for('main.contact_form')}}">
+          <div class="form-group">
+            <label for="exampleInputName">Full Name</label>
+            <input type="text" class="form-control" id="exampleInputName" aria-describedby="nameHelp" name="full_name">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" name = "email" id="exampleInputEmail1" aria-describedby="emailHelp" >
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="phone_number">Phone Number</label>
+            <input type="text" class="form-control" name = "phone" id="phone_number" aria-describedby="phoneHelp" >
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Talk to us</label>
+            <textarea class="form-control" name = "text" id="exampleFormControlTextarea1" rows="3" placeholder="Tell us what's on your mind"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" id="contact-submit">Submit</button>
+        </form>
+    </div>
+
+    {% endif %}
 </div>
 
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+crossorigin="anonymous"></script>
+<script type="text/javascript">
+  $("#click-here").click(function(e) {
+    e.preventDefault();
+    var aid = $(this).attr("href");
+    $('html,body').animate({scrollTop: $(aid).offset().top},'slow');
+});
+
+  $(document).ready(function(){
+    if ('{{session["role"]}}=="Admin"'){
+      // $("body").css({"background-image":"url('static/images/admin_back.jpg')","background-size":"cover"})
+    }
+    google.charts.load('current', {'packages':['corechart']});
+      if( '{{session['role']}}' == 'Admin'){
+        $("body").css("background-image","none")
+        $.ajax({
+          type : 'POST',
+          url : "/admin_landing_page",
+          success: function(response) {
+            $("#studnets").append(response['num_of_students'])
+            $("#classes").append(response['num_of_classes'])
+            $("#questions").append(response['num_of_questions'])
+            console.log(response)
+                google.charts.setOnLoadCallback(drawChart_q2n);
+                google.charts.setOnLoadCallback(drawChart_score2exams);
+                google.charts.setOnLoadCallback(drawChart_students_per_cls);
+                function drawChart_q2n() {
+
+                      // Create the data table.
+                      var data = new google.visualization.DataTable();
+                      data.addColumn('string', 'Notion');
+                      data.addColumn('number', 'Number_of_Questions');
+                      let rows = []
+                      for (notion in response['q_by_notion']){
+                        rows.push([notion,response['q_by_notion'][notion]])
+                      }
+                      data.addRows(rows);
+
+                      // Set chart options
+                      var options = {title:'Number of Questions by Notion',
+                                     width:600,
+                                     height:500,
+                                     backgroundColor:"white",
+                                     is3D:true
+                                    };
+
+                      // Instantiate and draw our chart, passing in some options.
+                      var chart = new google.visualization.PieChart(document.getElementById('q2n_chart_div'));
+                      chart.draw(data, options);
+                    }
+                function drawChart_score2exams(){
+
+                  data_array = [['class',"avg_score"]]
+                  for (exam in response['avg_score_by_exam']){
+                    data_array.push([exam,response['avg_score_by_exam'][exam]])
+                  }
+                  var data = google.visualization.arrayToDataTable(data_array)
+                  var options = {
+                      title:"Average score by exam",
+                      width: 500,
+                      height: 300,
+                      backgroundColor:"white",
+                      bar: {groupWidth: "95%"},
+                      legend: { position: "none" },
+                      is3D:true
+                  }
+                  var chart = new google.visualization.ColumnChart(document.getElementById("score2exam_chart"));
+                  chart.draw(data, options);
+                }
+                function drawChart_students_per_cls(){
+                  data_array=[['class','students',{ role: 'annotation' }]]
+
+                  for (cls in response['students_by_class']){
+
+                    data_array.push([cls,response['students_by_class'][cls]["stdnt_amnt"],"max: "+response['students_by_class'][cls]["max_capacity"]])
+                  }
+                  var data = google.visualization.arrayToDataTable(data_array)
+                  var options = {
+                    title:"Number of Students per Class",
+                    width: 500,
+                    height: 300,
+                    vAxis:{title:"Studnets"},
+                    hAxis:{title:"Class"},
+                    backgroundColor:"white",
+                    is3D:true
+                  }
+                  var chart = new google.visualization.ColumnChart(document.getElementById('stdnt2class_chart'));
+                  chart.draw(data, options);
+                }
+
+              }
+        });
+
+      }
+    });
+</Script>
 {% endblock %}

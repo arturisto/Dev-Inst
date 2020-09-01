@@ -1,0 +1,58 @@
+button{
+  margin-top:10px;
+  margin-bottom:10px;
+}
+.close{
+  margin-top:0px;
+  margin-bottom:0px;
+}
+
+
+.jumbotron{
+  background-color: ghostwhite;
+}
+@media (max-width:700px){
+  .jumbotron {
+      width:100%;
+    }
+
+}
+@media (min-width:701px){
+  .jumbotron {
+      width:50%;
+    }
+
+}
+
+.nav-tabs {
+    display:none;
+}
+
+@media(min-width:768px) {
+    .nav-tabs {
+        display: flex;
+    }
+
+    .card {
+        border: none;
+    }
+
+    .card .card-header {
+        display:none;
+    }
+
+    .card .collapse{
+        display:block;
+    }
+}
+
+@media(max-width:767px){
+    /*
+     * Changed selector to `.tab-content > .tab-pane` in order to override `.fade:not(.show)`
+     * In BS4 Beta `.tab-pane`s were rendered hidden by just `.fade`
+     */
+    .tab-content > .tab-pane {
+        display: block;
+        opacity: 1;
+    }
+}
