@@ -6,6 +6,7 @@ $("#click-here").click(function(e) {
 
 
 function run_dashboard(){
+  console.log("hi")
   google.charts.load('current', {'packages':['corechart']});
       $("body").css("background-image","none")
       $.ajax({

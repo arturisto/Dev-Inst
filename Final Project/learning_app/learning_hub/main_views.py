@@ -113,11 +113,16 @@ def exams_main():
     if session["role"] != enums.UserType.STUDENT:
         flash("This is student area, teachers and admins belong in management", category="student_vs_teachers")
         return render_template("exams.html")
-
+    exams = ""
     student_email = session['user_email']
     student_class = user_models.User.query.filter_by(email=student_email).first()
+    if not student_class.class_name:
+        flash("You are not assigned to class", category="error")
 
-    exams = student_class.class_name.exams
+    elif not student_class.class_name.exams:
+        flash("You are not assigned an exam", category="error")
+    else:
+        exams = student_class.class_name.exams
     return render_template("exams.html", exams=exams)
 
 
@@ -162,7 +167,7 @@ def calculate_exam_score(answer_sheet):
             if answer['answer'] == q.answer:
                 number_of_correct_questions += 1
 
-    score = (number_of_correct_questions / number_of_questions)*100
+    score = (number_of_correct_questions / number_of_questions) * 100
 
     exam_score = models.ExamScores()
     exam_score.score = score
@@ -172,3 +177,8 @@ def calculate_exam_score(answer_sheet):
     db.session.commit()
 
     return True
+
+
+@learning_hub_bp.route("/practice_exam")
+def practice_exam():
+    return redirect(url_for("main.under_const"))

@@ -62,7 +62,7 @@
              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
                <a class="dropdown-item" href="{{url_for('hub.exams_main')}}">Exams</a>
-               <a class="dropdown-item" href="">Practice Exams</a>
+               <a class="dropdown-item" href="{{url_for('hub.practice_exam')}}">Practice Exams</a>
               </div>
             </li>
             {% endif %}
@@ -76,10 +76,10 @@
        {% else %}
            {% if session['role'] == UserRoles.ADMIN %}
            <li class="nav-item active">
-             <a class="nav-link" href="#">Admin Dashboard</a>
+             <a class="nav-link" href="{{url_for('users.admin_page')}}">Admin Dashboard</a>
            </li>
            <li class="nav-item dropdown">
-             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             <a class="nav-link dropdown-toggle" href="{{url_for('users.management_home_page')}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                Management Area
              </a>
 
@@ -95,7 +95,7 @@
              </li>
           {% endif %}
           <li class="nav-item">
-              <a class="nav-link" href="/profile">Profile {{session['user']}}</a>
+              <a class="nav-link" href="{{url_for('users.profile')}}">Profile {{session['user']}}</a>
           </li>
           <li class="nav-item">
               <a class="nav-link" href="{{url_for('users.signout')}}">Sign out</a>

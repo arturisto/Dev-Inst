@@ -35,10 +35,10 @@ def login():
                 return flask.render_template("admin.html")
             return redirect(url_for("main.index"))
         else:
-            flask.flash("password is in correct",  category="password")
+            flask.flash("password is in correct", category="password")
             return redirect(url_for("users.login_show"))
     else:
-        flask.flash("email doesn't exists", category= "user")
+        flask.flash("email doesn't exists", category="user")
         return redirect(url_for("users.login_show"))
 
 
@@ -48,9 +48,9 @@ def signin_view():
     return render_template("signin.html", form=form)
 
 
-# todo - dissable this function when platform is complete - only for testing!!
 @user_blueprint.route("/signup", methods=['POST', "GET"])
 def signup():
+
     form = forms.CreateUser()
     user = models.User.query.filter_by(username=form.username.data).first()
     if user:
@@ -69,10 +69,13 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
         # todo add check the user creation function
+        user_check = models.User.query.filter_by(email = form.email.data).first()
+        if user_check:
+            flash("user created successfully", category="success")
+        else:
+            flash("something went wrong", category="fail")
 
-        flash("user created successfully")
-
-        return redirect(url_for("main.index"))
+        return redirect(url_for("users.management_home_page"))
 
     return redirect(url_for("main.index"))
 
@@ -139,14 +142,14 @@ def verify_access_token(token):
 # # ----------------------end of login/out----------------------------------
 
 # #-----------------------Start of user profile pages ----------------------
-# @main_blueprint.route('/profile/')
-# @flask_login.login_required
-# def profile():
-#     # get the user from the DB.
-#     user = models.User.query.filter_by(email=session['email']).first()
-#     return flask.render_template('profile.html', user=user)
-#
-#
+@user_blueprint.route('/profile/')
+@flask_login.login_required
+def profile():
+    # get the user from the DB.
+
+    return redirect(url_for("main.under_const"))
+
+
 # # #-----------------------End of user profile pages ----------------------
 #
 # # # ----------------------start of management area----------------------------------
@@ -199,10 +202,18 @@ def update_user():
 def delete_user():
     email = request.form['d_email']
     user = models.User.query.filter_by(email=email).first()
-    db.session.delete(user)
-    db.session.commit()
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+        user_check = models.User.query.filter_by(email=email).first()
+        if not user_check:
+            flash("user deleted successfully", category="success")
+        else:
+            flash("something went wrong", category="fail")
+    else:
+        flash("Email doesn't exist", category="fail")
 
-    return redirect("/management")
+    return redirect(url_for("users.management_home_page"))
 
 
 @user_blueprint.route("/create_new_class", methods=['POST', 'GET'])
@@ -216,7 +227,15 @@ def create_new_class():
     new_class = models.Class(class_name=form['class_name'], users=student_list)
     db.session.add(new_class)
     db.session.commit()
-    return redirect(url_for("main.index"))
+
+    new_class = models.Class.query.filter_by(class_name =form['class_name'])
+    if new_class:
+        flash("class created successfully", category="success")
+    else:
+        flash("something went wrong", category="fail")
+
+    return redirect(url_for("users.management_home_page"))
+
 
 
 @user_blueprint.route("/find_class", methods=['POST', 'GET'])
@@ -240,9 +259,12 @@ def delete_student():
         user.class_id = None
         db.session.commit()
 
-    check_delete_class(class_name)
+    if check_delete_class(class_name):
+        flash ("Class and Students were deleted", category="success")
+    else:
+        flash("Students were deleted from class", category="success")
 
-    return redirect(url_for("main.index"))
+    return redirect(url_for("users.management_home_page"))
 
 
 def check_delete_class(class_name):
@@ -251,7 +273,8 @@ def check_delete_class(class_name):
     if not student_class.users:
         db.session.delete(student_class)
         db.session.commit()
-
+        return True
+    return False
 
 @user_blueprint.route("/admin_landing_page", methods=['POST', 'GET'])
 def admin_landing_page():
@@ -316,10 +339,10 @@ def get_q_by_notion(questions, notions):
                 q_by_notion[notion.notion] += 1
     return q_by_notion
 
+
 @user_blueprint.route("/admin_page", methods=['POST', 'GET'])
 def admin_page():
-
-    if session['role']==UserType.ADMIN:
+    if session['role'] == UserType.ADMIN:
         return flask.render_template("admin.html")
     else:
         return redirect(url_for("main.home"))

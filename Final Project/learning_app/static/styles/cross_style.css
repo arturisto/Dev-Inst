@@ -24,35 +24,6 @@ button{
 
 }
 
-.nav-tabs {
-    display:none;
-}
-
-@media(min-width:768px) {
-    .nav-tabs {
-        display: flex;
-    }
-
-    .card {
-        border: none;
-    }
-
-    .card .card-header {
-        display:none;
-    }
-
-    .card .collapse{
-        display:block;
-    }
-}
-
-@media(max-width:767px){
-    /*
-     * Changed selector to `.tab-content > .tab-pane` in order to override `.fade:not(.show)`
-     * In BS4 Beta `.tab-pane`s were rendered hidden by just `.fade`
-     */
-    .tab-content > .tab-pane {
-        display: block;
-        opacity: 1;
-    }
+.small-alert{
+  margin-top:5px;
 }

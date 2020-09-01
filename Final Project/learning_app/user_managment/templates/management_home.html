@@ -7,12 +7,27 @@
 {% block body %}
 
 <div class = "jumbotron w-75">
-
+  {% with messages = get_flashed_messages(with_categories=true,category_filter=["success","fail"]) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        {% if "fail" == category %}
+          <div class="alert alert-danger " role="alert">
+        {% elif "success" == category %}
+          <div class="alert alert-success " role="alert">
+        {% endif %}
+          {{message}}
+      {% endfor %}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
+        <span aria-hidden="true">&times;</span>
+     </button>
+      </div>
+    {% endif %}
+  {% endwith %}
 
 <!-----------------------start Tabs --------------------->
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" href="#users" data-toggle="tab" id ="users-tab" role="tab">User Management</a>
+            <a class="nav-link active" href="#users" data-toggle="tab" id ="users-tab"   role="tab">User Management</a>
 
           </li>
           <li class="nav-item">
@@ -28,7 +43,7 @@
 
 
         <!-----------------------Start Tab Content --------------------->
-        <div class="tab-content" id="myTabContent" role="tablist">
+        <div class="tab-content" id="myTabContent">
 
           <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
               <br>
@@ -119,7 +134,7 @@
                 <div class="collapse" id="delete_user_form">
                     <form method="post" action="{{url_for('users.delete_user')}}" id="d_user_find">
                         <br>
-                        <label>Search by Email</label>
+                        <label>Search by email</label>
                         <input type="email" class="form-control" id="user_delete_email" name = "d_email" placeholder="Email">
                         <button class="btn btn-info btn-small" id = "delete_btn">Delete</button>
                     </form>
@@ -136,7 +151,7 @@
 
                   <div class="collapse" id="create_class_form">
                         <form method="post" action="{{url_for('users.create_new_class')}}" >
-                          <h4> Create new User and assign users</h4>
+                          <h4> Create new Class and assign students</h4>
                           <table >
                               <tbody>
                                 <tr id = "class-name-group" class="form-group">
@@ -168,7 +183,7 @@
                   <!-----show class---->
 
                   <button class="btn btn-primary" onclick="show_class_view_manage()" type="button" data-toggle="collapse" data-target="#update_class_form" aria-expanded="false" aria-controls="collapseExample">
-                      Search and update Class
+                  Remove Students from Class
                   </button><br><br>
                   <div class="collapse" id="update_class_form">
                         <form method="post" action="" id="class_find_form">
@@ -177,7 +192,7 @@
                             <input type="text" class="form-control" id="class_search_input" placeholder="Enter Class Name" name="class_name">
                             <button type="submit" class="btn btn-info btn-small" id = "search_class_btn" onclick="search_class()">Search</button>
                         </form>
-                        <div id = "class_show" class="d-none">
+                        <div id = "class_show" id="upd_cls" class="d-none">
                           <h4></h4>
                           <form method="post" action="/users/delete_student" id="delete_student_form">
                               <table class="table">
