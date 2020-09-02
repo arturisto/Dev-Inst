@@ -20,7 +20,10 @@ class DevConfig(Config):
     MAIL_PASSWORD   = 'b3cFlJ9Y'
 
 class ProdConfig(Config):
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "app.db")
+
+    # SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "app.db")
+    SQLALCHEMY_DATABASE_URI = os.environ["DATABASE_URL"]
+    # SQLALCHEMY_DATABASE_URI ='postgresql://postgres:123456789@localhost:5432/app'
     SECRET_KEY = "1265ewqtfsdaxvgz9287ynx918u2nx8172m301u9"
 
     MAIL_SERVER = "smtp.gmail.com"
